@@ -1,9 +1,13 @@
-﻿using RmsWebApi.Data;
+﻿
+using RmsWebApi.Data;
 
 namespace RmsWebApi.Repository.Interfaces
 {
-    public interface IUserRepository : IBaseRepository<UserInfo>
+    public interface IUserRepository : IBaseRepository<UserInfoDomain>
     {
-        
+        public List<UserNotificationsDomain> GetNotifications();
+
+        public List<UserNotificationsDomain> GetActiveNotification();
+
     }
 }

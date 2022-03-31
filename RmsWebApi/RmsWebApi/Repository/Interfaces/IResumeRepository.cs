@@ -1,6 +1,8 @@
-﻿namespace RmsWebApi.Repository.Interfaces
+﻿using RmsWebApi.Data;
+
+namespace RmsWebApi.Repository.Interfaces
 {
-    public interface IResumeRepository 
+    public interface IResumeRepository : IBaseRepository<ResumeDomain>
     {
     }
 }
