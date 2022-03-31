@@ -213,11 +213,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\khushboo.rathore\\source\\repos\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj",
+      "projectUniqueName": "D:\\Project_RMS\\API\\rms_group1_webapi\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj",
       "projectName": "RmsWebApi",
-      "projectPath": "C:\\Users\\khushboo.rathore\\source\\repos\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj",
+      "projectPath": "D:\\Project_RMS\\API\\rms_group1_webapi\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj",
       "packagesPath": "C:\\Users\\khushboo.rathore\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\khushboo.rathore\\source\\repos\\RmsWebApi\\RmsWebApi\\obj\\",
+      "outputPath": "D:\\Project_RMS\\API\\rms_group1_webapi\\RmsWebApi\\RmsWebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\khushboo.rathore\\AppData\\Roaming\\NuGet\\NuGet.Config",

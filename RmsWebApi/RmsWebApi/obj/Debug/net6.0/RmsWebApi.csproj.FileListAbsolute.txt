@@ -1,0 +1,14 @@
+C:\Users\khushboo.rathore\source\repos\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.csproj.AssemblyReference.cache
+C:\Users\khushboo.rathore\source\repos\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\khushboo.rathore\source\repos\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.AssemblyInfoInputs.cache
+C:\Users\khushboo.rathore\source\repos\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.AssemblyInfo.cs
+C:\Users\khushboo.rathore\source\repos\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.csproj.CoreCompileInputs.cache
+C:\Users\khushboo.rathore\source\repos\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\khushboo.rathore\source\repos\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.MvcApplicationPartsAssemblyInfo.cache
+D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.csproj.AssemblyReference.cache
+D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.AssemblyInfoInputs.cache
+D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.AssemblyInfo.cs
+D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.csproj.CoreCompileInputs.cache
+D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.MvcApplicationPartsAssemblyInfo.cs
+D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.MvcApplicationPartsAssemblyInfo.cache
