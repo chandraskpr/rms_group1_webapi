@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\khushboo.rathore\\source\\repos\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj": {}
+    "D:\\Project\\Resume Management System\\development\\rms_group1_webapi\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\khushboo.rathore\\source\\repos\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj": {
+    "D:\\Project\\Resume Management System\\development\\rms_group1_webapi\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\khushboo.rathore\\source\\repos\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj",
+        "projectUniqueName": "D:\\Project\\Resume Management System\\development\\rms_group1_webapi\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj",
         "projectName": "RmsWebApi",
-        "projectPath": "C:\\Users\\khushboo.rathore\\source\\repos\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj",
-        "packagesPath": "C:\\Users\\khushboo.rathore\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\khushboo.rathore\\source\\repos\\RmsWebApi\\RmsWebApi\\obj\\",
+        "projectPath": "D:\\Project\\Resume Management System\\development\\rms_group1_webapi\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj",
+        "packagesPath": "C:\\Users\\rahul.mishra\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\Resume Management System\\development\\rms_group1_webapi\\RmsWebApi\\RmsWebApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\khushboo.rathore\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rahul.mishra\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -63,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
