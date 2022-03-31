@@ -1,6 +1,9 @@
-﻿namespace RmsWebApi.Repository
+﻿using RmsWebApi.Data;
+using RmsWebApi.Repository.Interfaces;
+
+namespace RmsWebApi.Repository
 {
-    public class ResumeRepository
+    public class ResumeRepository : BaseRepository<UserInfo>
     {
     }
 }
