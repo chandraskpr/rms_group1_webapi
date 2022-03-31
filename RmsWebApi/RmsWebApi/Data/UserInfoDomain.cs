@@ -2,18 +2,16 @@
 
 namespace RmsWebApi.Data
 {
-    public class UserInfo
+    public class UserInfoDomain
+
     {
         [Key]
         public int UserId { get; set; }
-        
         [Required]
-        public string Name { get; set; }
-
+        public string UserName { get; set; }
         [Required]
-        public string Role { get; set; }
-
+        public string UserRole { get; set; }
         [Required]
-        public string Email { get; set; }
+        public string UserEmail { get; set; }
     }
 }

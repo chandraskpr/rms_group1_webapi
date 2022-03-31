@@ -21,9 +21,9 @@ namespace RmsWebApi.RMS_DB
         public virtual DbSet<EducationDetail> EducationDetails { get; set; } = null!;
         public virtual DbSet<Membership> Memberships { get; set; } = null!;
         public virtual DbSet<MyDetail> MyDetails { get; set; } = null!;
-        public virtual DbSet<Resume> Resumes { get; set; } = null!;
+        public virtual DbSet<Resume> Resume { get; set; } = null!;
         public virtual DbSet<Skill> Skills { get; set; } = null!;
-        public virtual DbSet<UserInfo> UserInfos { get; set; } = null!;
+        public virtual DbSet<UserInfo> UserInfo { get; set; } = null!;
         public virtual DbSet<UserNotification> UserNotifications { get; set; } = null!;
         public virtual DbSet<UserResume> UserResumes { get; set; } = null!;
         public virtual DbSet<WorkExperience> WorkExperiences { get; set; } = null!;
@@ -33,7 +33,7 @@ namespace RmsWebApi.RMS_DB
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=PS-WIN-LP-512\\SQLEXPRESS01;Database=RMS;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=PS-WIN-LP-509;Database=RMS;Trusted_Connection=True;");
             }
         }
 
@@ -217,11 +217,11 @@ namespace RmsWebApi.RMS_DB
             modelBuilder.Entity<UserInfo>(entity =>
             {
                 entity.HasKey(e => e.UserId)
-                    .HasName("PK__UserInfo__CB9A1CFF9FA93AF5");
+                    .HasName("PK__UserInfo__CB9A1CFF996C1887");
 
                 entity.ToTable("UserInfo");
 
-                entity.HasIndex(e => e.UserEmail, "UQ__UserInfo__D54ADF55647F2674")
+                entity.HasIndex(e => e.UserEmail, "UQ__UserInfo__D54ADF55E320216A")
                     .IsUnique();
 
                 entity.Property(e => e.UserId)
@@ -247,7 +247,7 @@ namespace RmsWebApi.RMS_DB
             modelBuilder.Entity<UserNotification>(entity =>
             {
                 entity.HasKey(e => e.NotificationId)
-                    .HasName("PK__UserNoti__4BA5CEA93F56ED75");
+                    .HasName("PK__UserNoti__4BA5CEA9729A5BDE");
 
                 entity.ToTable("UserNotification");
 
@@ -276,7 +276,7 @@ namespace RmsWebApi.RMS_DB
                     .WithMany(p => p.UserNotifications)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__UserNotif__userI__5070F446");
+                    .HasConstraintName("FK__UserNotif__userI__3E52440B");
             });
 
             modelBuilder.Entity<UserResume>(entity =>
