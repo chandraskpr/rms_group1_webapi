@@ -11,9 +11,9 @@ namespace RmsWebApi.Controllers.API.Controller
     [ApiController]
     public class ResumeController : ControllerBase
     {
-        private readonly ResumeRepository resumeRepository;
+        private readonly IResumeRepository resumeRepository;
 
-        public ResumeController(ResumeRepository resumeRepository)
+        public ResumeController(IResumeRepository resumeRepository)
         {
             this.resumeRepository = resumeRepository;
         }
@@ -21,7 +21,7 @@ namespace RmsWebApi.Controllers.API.Controller
         [HttpGet]
         public List<ResumeDomain> Get()
         {
-            return this.resumeRepository.SelectAll();
+            return this.resumeRepository.GetAll();
         }
 
         [HttpPost]
