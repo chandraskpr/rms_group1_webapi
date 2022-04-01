@@ -4,18 +4,18 @@ using RmsWebApi.RMS_DB;
 
 namespace RmsWebApi.Repository
 {
-    public class ResumeRepository : BaseRepository<ResumeDomain>, IResumeRepository
+    public class ResumeRepository : BaseRepository<Resume>, IResumeRepository
     {
-        private readonly RMSContext context;
+       
         public ResumeRepository(RMSContext context)
+            : base(context)
         {
 
-            this.context = context;
         }
 
-        public List<ResumeDomain> SelectAll()
+        public List<ResumeDomain> GetAll()
         {
-            var records = context.Resume.Select(x => new ResumeDomain()
+            var records = base.SelectAll().Select(x => new ResumeDomain()
             {
                 ResumeId = x.ResumeId,
                 ResumeTitle = x.ResumeTitle,
@@ -37,30 +37,30 @@ namespace RmsWebApi.Repository
                 CreationDate= resume.CreationDate,
                
             };
-            context.Resume.Add(res);
-            context.SaveChanges();
+            base.Create(res);
+            
         }
 
 
         public void Delete(int ResumeId)
         {
-            var res = context.Resume.Find(ResumeId);
-            context.Resume.Remove(res);
-            context.SaveChanges();
+            var res = base.SelectAll().FirstOrDefault(x => x.ResumeId == ResumeId);
+            base.Delete(res);
+         
         }
 
         public void Update(int ResumeId, ResumeDomain resume)
         {
-            var res = context.Resume.Find(ResumeId);
+            var res = base.SelectAll().FirstOrDefault(x => x.ResumeId == ResumeId);
             if (res != null)
             {
                 res.ResumeTitle = resume.ResumeTitle;
                 res.ResumeStatus = resume.ResumeStatus;
                 res.UpdationDate = resume.UpdationDate;
                 res.CreationDate = resume.CreationDate;
-               
 
-                context.SaveChanges();
+                base.Update(res);
+                
             }
 
         }

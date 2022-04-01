@@ -5,19 +5,19 @@ using RmsWebApi.RMS_DB;
 
 namespace RmsWebApi.Repository
 {
-    public class UserRepository : BaseRepository<UserInfoDomain> , IUserRepository
+    public class UserRepository : BaseRepository<UserInfo> , IUserRepository
     {
 
-        private readonly RMSContext context;
+       
         public UserRepository(RMSContext context)
+            : base(context)
         {   
             
-            this.context = context;
         }
 
-        public List<UserInfoDomain> SelectAll()
+        public List<UserInfoDomain> GetAll()
         {
-            var records = context.UserInfo.Select(x => new UserInfoDomain()
+            var records = base.SelectAll().Select(x => new UserInfoDomain()
             {   
                 UserId = x.UserId,
                 UserName = x.UserName,
@@ -38,28 +38,30 @@ namespace RmsWebApi.Repository
 
             };
 
-            context.UserInfo.Add(user);
-            context.SaveChanges();
+            base.Create(user);
+           
         }
          
 
         public void Delete(int UserId )
         {
-            var user = context.UserInfo.Find(UserId);
-            context.UserInfo.Remove(user);
-            context.SaveChanges();  
+            var user = base.SelectAll().FirstOrDefault(x => x.UserId==UserId);
+            base.Delete(user);
+            
         }
 
         public void Update(int UserId , UserInfoDomain userInfo)
         {
-            var user = context.UserInfo.Find(UserId);
+            var user = base.SelectAll().FirstOrDefault(x => x.UserId==UserId);
+
             if(user != null)
             {
                 user.UserName = userInfo.UserName;
                 user.UserEmail = userInfo.UserEmail;
                 user.UserRole = userInfo.UserRole;
-
-                context.SaveChanges();
+                
+                base.Update(user);
+               
             }
              
         }

@@ -1,35 +1,47 @@
-﻿using RmsWebApi.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using RmsWebApi.Data;
 using RmsWebApi.Repository.Interfaces;
+using RmsWebApi.RMS_DB;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 namespace RmsWebApi.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T:class
     {
-        public List<T> datacolletion;
 
-        public BaseRepository()
-        {
-            datacolletion = new List<T>();
-        }
-        public void Create<T>(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        protected readonly RMSContext context;
+        private readonly DbSet<T> entitySet;
 
-        public void  Delete<T>(T entity)
+        public BaseRepository(RMSContext context)
         {
-            throw new NotImplementedException();
+
+            this.context = context;
+            entitySet = this.context.Set<T>();
         }
 
-        public List<T> SelectAll<T>()
+
+        public void Create(T entity)
         {
-            return null;
+            entitySet.Add(entity);
+            context.SaveChanges();
         }
 
-        public void  Update<T>(T entity)
+        public void  Delete(T entity)
         {
-            throw new NotImplementedException();
+            entitySet.Remove(entity);
+            context.SaveChanges();
+        }
+
+        public List<T> SelectAll()
+        {
+            return entitySet.ToList();
+        }
+
+        public void  Update(T entity)
+        {
+            entitySet.Update(entity);
+            context.SaveChanges();
         }
     }
 
