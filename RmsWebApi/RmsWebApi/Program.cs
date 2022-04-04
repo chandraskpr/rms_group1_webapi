@@ -7,9 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("RMSDbConnection");
-builder.Services.AddDbContext<RMSContext>(options => options.UseSqlServer("connectionString"));
+builder.Services.AddDbContext<RMSContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 builder.Services.AddControllers();
