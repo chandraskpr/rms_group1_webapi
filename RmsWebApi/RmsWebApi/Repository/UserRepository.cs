@@ -2,7 +2,7 @@
 using RmsWebApi.Data;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
-
+using RMS.Domain
 namespace RmsWebApi.Repository
 {
     public class UserRepository : BaseRepository<UserInfo> , IUserRepository
@@ -23,6 +23,8 @@ namespace RmsWebApi.Repository
                 UserName = x.UserName,
                 UserEmail = x.UserEmail,
                 UserRole = x.UserRole,
+
+               
 
             }).ToList();
             return records;

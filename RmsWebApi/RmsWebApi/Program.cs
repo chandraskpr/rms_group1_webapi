@@ -1,15 +1,17 @@
 using Microsoft.EntityFrameworkCore;
+using RmsWebApi;
 using RmsWebApi.Repository;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.AddLog4Net(new Log4NetProviderOptions("log4net.config"));
 // Add services to the container.
 
 
 var connectionString = builder.Configuration.GetConnectionString("RMSDbConnection");
-builder.Services.AddDbContext<RMSContext>(options => options.UseSqlServer("connectionString"));
+builder.Services.AddDbContext<RMSContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
@@ -34,6 +36,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<GlobalErrorMiddleware>();
 
 app.MapControllers();
 

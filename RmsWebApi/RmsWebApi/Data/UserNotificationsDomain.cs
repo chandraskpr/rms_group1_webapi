@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RmsWebApi.Data
+namespace Rms.Domain.UserInfo
 {
     public class UserNotificationsDomain
     {   

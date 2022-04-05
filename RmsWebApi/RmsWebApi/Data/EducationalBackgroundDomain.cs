@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RMS.Domain.ResumeDomain
 {
-    public class EducationalBackground
+    public class EducationalBackgroundDomain
     {
         [Key]
         

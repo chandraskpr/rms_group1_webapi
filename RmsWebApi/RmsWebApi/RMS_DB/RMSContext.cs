@@ -31,11 +31,11 @@ namespace RmsWebApi.RMS_DB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=PS-WIN-LP-509;Database=RMS;Trusted_Connection=True;");
-            }
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//                optionsBuilder.UseSqlServer("Server=PS-WIN-LP-509;Database=RMS;Trusted_Connection=True;");
+//            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -61,7 +61,9 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.AboutMes)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_AboutMe_Resume");
+                    .HasConstraintName("FK_AboutMe_Resume")
+                    .OnDelete(DeleteBehavior.Cascade);
+                
             });
 
             modelBuilder.Entity<Achievement>(entity =>
@@ -85,7 +87,8 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.Achievements)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_Achievements_Resume");
+                    .HasConstraintName("FK_Achievements_Resume")
+                    .OnDelete(DeleteBehavior.Cascade); ;
             });
 
             modelBuilder.Entity<EducationDetail>(entity =>
@@ -124,7 +127,9 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.EducationDetails)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_EducationDetails_Resume");
+                    .HasConstraintName("FK_EducationDetails_Resume")
+
+                    .OnDelete(DeleteBehavior.Cascade); ;
             });
 
             modelBuilder.Entity<Membership>(entity =>
@@ -148,7 +153,9 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.Memberships)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_Membership_Resume");
+                    .HasConstraintName("FK_Membership_Resume")
+
+                    .OnDelete(DeleteBehavior.Cascade); ;
             });
 
             modelBuilder.Entity<MyDetail>(entity =>
@@ -170,7 +177,9 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.MyDetails)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_MyDetails_Resume");
+                    .HasConstraintName("FK_MyDetails_Resume")
+
+                    .OnDelete(DeleteBehavior.Cascade); ;
             });
 
             modelBuilder.Entity<Resume>(entity =>
@@ -196,6 +205,7 @@ namespace RmsWebApi.RMS_DB
                 entity.Property(e => e.UpdationDate)
                     .HasColumnType("datetime")
                     .HasColumnName("updationDate");
+                
             });
 
             modelBuilder.Entity<Skill>(entity =>
@@ -212,7 +222,8 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.Skills)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_Skills_Resume");
+                    .HasConstraintName("FK_Skills_Resume")
+                    .OnDelete(DeleteBehavior.Cascade); ;
             });
 
             modelBuilder.Entity<UserInfo>(entity =>
@@ -226,7 +237,7 @@ namespace RmsWebApi.RMS_DB
                     .IsUnique();
 
                 entity.Property(e => e.UserId)
-                    .ValueGeneratedNever()
+                    .UseIdentityColumn()
                     .HasColumnName("userId");
 
                 entity.Property(e => e.UserEmail)
@@ -277,7 +288,8 @@ namespace RmsWebApi.RMS_DB
                     .WithMany(p => p.UserNotifications)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__UserNotif__userI__3E52440B");
+                    .HasConstraintName("FK__UserNotif__userI__3E52440B")
+                    .OnDelete(DeleteBehavior.Cascade); ;
             });
 
             modelBuilder.Entity<UserResume>(entity =>
@@ -299,7 +311,8 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserResumes)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_UserResume_UserInfo");
+                    .HasConstraintName("FK_UserResume_UserInfo")
+                    .OnDelete(DeleteBehavior.Cascade); ;
             });
 
             modelBuilder.Entity<WorkExperience>(entity =>
@@ -356,7 +369,7 @@ namespace RmsWebApi.RMS_DB
                     .HasForeignKey(d => d.ResumeId)
                     .HasConstraintName("FK_WorkExperience_Resume");
             });
-
+            
             OnModelCreatingPartial(modelBuilder);
         }
 
