@@ -5,6 +5,8 @@ using RmsWebApi.RMS_DB;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.AddLog4Net(new Log4NetProviderOptions("log4net.config"));
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("RMSDbConnection");
 builder.Services.AddDbContext<RMSContext>(options => options.UseSqlServer(connectionString));
