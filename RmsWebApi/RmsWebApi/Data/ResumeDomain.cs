@@ -10,7 +10,7 @@ namespace RmsWebApi.Data
             SkillList = new List<Skills>();
             aboutMes = new List<AboutMes>();
             achievements = new List<Achievements>();
-            educationalBackgrounds = new List<EducationalBackground>();
+            educationDetails = new List<EducationDetails>();
             memberships = new List<Memberships>();
             myDetails = new List<MyDetails>();
             workExperienceDomains = new List<WorkExperienceDomain>();
@@ -23,7 +23,7 @@ namespace RmsWebApi.Data
         public List<Skills> SkillList { get; set; }
         public List<AboutMes> aboutMes { get; set; }
         public List<Achievements> achievements { get; set; }
-        public List<EducationalBackground> educationalBackgrounds { get; set; }
+        public List<EducationDetails> educationDetails { get; set; }
         public List<Memberships> memberships { get; set; }
         public List<MyDetails> myDetails { get; set; }
         public List<WorkExperienceDomain> workExperienceDomains { get; set; }
