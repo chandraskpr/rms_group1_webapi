@@ -13,7 +13,7 @@ namespace RMS.Domain.ResumeDomain
         public int PassingYear { get; set; }
         
         [Display(Name = "Percentage/CGPA")]
-        public float Marks { get; set; }
+        public double Marks { get; set; }
 
         [Display(Name = "University/BOARD")]
         public string University { get; set; }
