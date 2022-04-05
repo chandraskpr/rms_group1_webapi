@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 var connectionString = builder.Configuration.GetConnectionString("RMSDbConnection");
-builder.Services.AddDbContext<RMSContext>(options => options.UseSqlServer("connectionString"));
+builder.Services.AddDbContext<RMSContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 

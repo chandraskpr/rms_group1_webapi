@@ -2064,11 +2064,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Project\\RMS\\RmsWebApi (1)\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj",
+      "projectUniqueName": "E:\\Project\\RMS\\rms_group1_webapi\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj",
       "projectName": "RmsWebApi",
-      "projectPath": "E:\\Project\\RMS\\RmsWebApi (1)\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj",
+      "projectPath": "E:\\Project\\RMS\\rms_group1_webapi\\RmsWebApi\\RmsWebApi\\RmsWebApi.csproj",
       "packagesPath": "C:\\Users\\devang.vashistha\\.nuget\\packages\\",
-      "outputPath": "E:\\Project\\RMS\\RmsWebApi (1)\\RmsWebApi\\RmsWebApi\\obj\\",
+      "outputPath": "E:\\Project\\RMS\\rms_group1_webapi\\RmsWebApi\\RmsWebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\devang.vashistha\\AppData\\Roaming\\NuGet\\NuGet.Config",
