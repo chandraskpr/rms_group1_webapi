@@ -198,7 +198,87 @@ namespace RmsWebApi.Repository
                 res.ResumeStatus = resume.ResumeStatus;
                 res.UpdationDate = resume.UpdationDate;
                 res.CreationDate = resume.CreationDate;
-                //res.Skills = res
+                
+                foreach(var record in resume.SkillList)
+                {
+                    res.Skills.Add(new Skill()
+                    {
+                        Category = record.Category,
+                    }
+                    );
+                }
+
+                foreach (var record in resume.aboutMes)
+                {
+                    res.AboutMes.Add(new AboutMe()
+                    {
+                        MainDescription = record.MainDescription,
+                        KeyPoints = record.KeyPoints,
+                    }
+                    );
+                }
+
+                foreach (var records in resume.myDetails)
+                {
+                    res.MyDetails.Add(new MyDetail()
+                    {
+                        ProfilePicture = records.ProfilePicture,
+                        TotalExp = records.TotalExp,
+                    }
+                    );
+                }
+
+                foreach (var records in resume.achievements)
+                {
+                    res.Achievements.Add(new Achievement()
+                    {
+                        AchievementName = records.AchievementName,
+                        AchievementYear = records.AchievementYear,
+                        AchievementDesc = records.AchievementDescription,
+                    }
+                    );
+                }
+
+                foreach (var records in resume.memberships)
+                {
+                    res.Memberships.Add(new Membership()
+                    {
+                        MembershipName = records.MembershipName,
+                        MembershipDesc = records.MembershipDescription,
+                    }
+                    );
+                }
+
+                foreach (var records in resume.workExperienceDomains)
+                {
+                    res.WorkExperiences.Add(new WorkExperience()
+                    {
+                        ClientDescription = records.ClientDescription,
+                        Country = records.Country,
+                        ProjectName = records.ProjectName,
+                        ProjectResponsibilities = records.ProjectResponsibilities,
+                        ProjectRole = records.ProjectRole,
+                        BusinessSolution = records.BusinessSolution,
+                        StartDate = records.StartDate,
+                        EndDate = records.EndDate,
+                        TechnologyStack = records.TechnologyStack,
+                    }
+                    );
+                }
+
+                foreach (var records in resume.educationDetails)
+                {
+                    res.EducationDetails.Add(new EducationDetail()
+                    {
+                        CourseName = records.CourseName,
+                        InstituteName = records.InstitutionName,
+                        Specialization = records.Stream,
+                        PassingYear = records.PassingYear,
+                        Marks = records.Marks,
+                        University = records.University,
+                    }
+                    );
+                }
 
                 base.Update(res);
 
