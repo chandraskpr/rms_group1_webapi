@@ -3,8 +3,8 @@
     public class Achievements
     {
         public string AchievementName { get; set; }
-        public string AchievementYear { get; set; }
+        public int AchievementYear { get; set; }
 
-        public int AchievementDescription { get; set; }
+        public string AchievementDescription { get; set; }
     }
 }
