@@ -23,6 +23,14 @@ namespace RmsWebApi.Repository
                 UserEmail = x.UserEmail,
                 UserRole = x.UserRole,
 
+                userResumeDomains = x.UserResumes.Select(a => new UserResumeDomain()
+                {
+                    UserId = a.UserResumeId,
+                    UserResumeId = a.UserResumeId,
+                    ResumeId = a.ResumeId,
+                }
+                ).ToList(),
+
             }).ToList();
             return records;
         }
