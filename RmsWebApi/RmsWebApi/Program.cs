@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using RmsWebApi;
 using RmsWebApi.Repository;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
+using Microsoft.EntityFrameworkCore.Proxies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,13 @@ builder.Logging.AddLog4Net(new Log4NetProviderOptions("log4net.config"));
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("RMSDbConnection");
+
+builder.Services.AddDbContext<RMSContext>(options =>
+//{
+    options.UseLazyLoadingProxies()
+    .UseSqlServer(connectionString)
+ );
+
 builder.Services.AddDbContext<RMSContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
@@ -33,6 +42,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseMiddleware<GlobalErrorMiddleware>();
 app.MapControllers();
 
 app.Run();
