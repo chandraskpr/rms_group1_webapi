@@ -23,7 +23,7 @@ namespace RmsWebApi.Repository
                 UserEmail = x.UserEmail,
                 UserRole = x.UserRole,
 
-                userResumeDomains = x.UserResumes.Select(a => new UserResumeDomain()
+                userResumeDomains = x.UserResumes.Select(a => new UserResumeDomains()
                 {
                     UserId = a.UserResumeId,
                     UserResumeId = a.UserResumeId,
@@ -44,6 +44,17 @@ namespace RmsWebApi.Repository
                 UserRole = userInfo.UserRole,
 
             };
+
+            foreach (var records in userInfo.userResumeDomains)
+            {
+                user.UserResumes.Add(new UserResume()
+                {
+                    UserResumeId = records.UserResumeId,
+                    UserId = records.UserId,
+                    ResumeId = records.ResumeId,
+                }
+                );
+            }
 
             base.Create(user);
 
@@ -66,6 +77,17 @@ namespace RmsWebApi.Repository
                 user.UserName = userInfo.UserName;
                 user.UserEmail = userInfo.UserEmail;
                 user.UserRole = userInfo.UserRole;
+
+                foreach (var records in userInfo.userResumeDomains)
+                {
+                    user.UserResumes.Add(new UserResume()
+                    {
+                        UserResumeId = records.UserResumeId,
+                        UserId = records.UserId,
+                        ResumeId = records.ResumeId,
+                    }
+                    );
+                }
 
                 base.Update(user);
 

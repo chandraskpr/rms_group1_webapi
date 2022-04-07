@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace RmsWebApi.Data
 {
-    public partial class UserResumeDomain
+    public partial class UserResumeDomains
     {
         public int UserResumeId { get; set; }
         public int? UserId { get; set; }

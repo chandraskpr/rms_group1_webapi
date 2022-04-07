@@ -17,6 +17,6 @@ namespace RmsWebApi.RMS_DB
         public string UserEmail { get; set; } = null!;
 
         public virtual ICollection<UserNotification> UserNotifications { get; set; }
-        public virtual ICollection<UserResume> UserResumes { get; set; }
+        public virtual ICollection<UserResume> UserResumes{ get; set; }
     }
 }

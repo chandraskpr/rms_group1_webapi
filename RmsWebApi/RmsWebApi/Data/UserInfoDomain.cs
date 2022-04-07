@@ -7,7 +7,7 @@ namespace RmsWebApi.Data
     {
         public UserInfoDomain()
         {
-            userResumeDomains = new List<UserResumeDomain>();
+            userResumeDomains = new List<UserResumeDomains>();
         }
         [Key]
         public int UserId { get; set; }
@@ -17,6 +17,6 @@ namespace RmsWebApi.Data
         public string UserRole { get; set; }
         [Required]
         public string UserEmail { get; set; }
-        public List<UserResumeDomain> userResumeDomains { get; set; }
+        public List<UserResumeDomains> userResumeDomains { get; set; }
     }
 }

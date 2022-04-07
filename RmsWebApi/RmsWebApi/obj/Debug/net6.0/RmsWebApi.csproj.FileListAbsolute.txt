@@ -1,3 +1,4 @@
+D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\log4net.config
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\appsettings.Development.json
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\appsettings.json
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\RmsWebApi.exe
@@ -5,14 +6,18 @@ D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsW
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\RmsWebApi.runtimeconfig.json
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\RmsWebApi.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\RmsWebApi.pdb
+D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Castle.Core.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Humanizer.dll
+D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\log4net.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Proxies.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Identity.Client.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
@@ -21,6 +26,7 @@ D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsW
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.OpenApi.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Project\Resume Management System\development\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
