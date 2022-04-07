@@ -1,4 +1,5 @@
-﻿using RmsWebApi.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using RmsWebApi.Data;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
 
@@ -184,7 +185,19 @@ namespace RmsWebApi.Repository
 
         public void Delete(int ResumeId)
         {
-            var res = base.SelectAll().FirstOrDefault(x => x.ResumeId == ResumeId);
+
+            var res = this.entitySet
+                .Include(x => x.MyDetails)
+                .Include(x => x.Memberships)
+                .Include(x => x.AboutMes)
+                .Include(x => x.Achievements)
+                .Include(x => x.EducationDetails)
+                .Include(x => x.UserResumes)
+                .Include(x => x.Skills)
+                .Include(x => x.WorkExperiences)
+                .FirstOrDefault(x => x.ResumeId == ResumeId);
+            
+            //var res = base.SelectAll().FirstOrDefault(x => x.ResumeId == ResumeId);
 
             //context.AboutMes.RemoveRange(res.AboutMes);
             //context.Memberships.RemoveRange(res.Memberships);

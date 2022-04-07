@@ -11,7 +11,7 @@ namespace RmsWebApi.Repository
     {
 
         protected readonly RMSContext context;
-        private readonly DbSet<T> entitySet;
+        protected readonly DbSet<T> entitySet;
 
         public BaseRepository(RMSContext context)
         {
