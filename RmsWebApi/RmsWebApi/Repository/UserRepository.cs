@@ -2,6 +2,7 @@
 using RmsWebApi.Data;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
+using RMS.Domain;
 
 namespace RmsWebApi.Repository
 {

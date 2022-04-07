@@ -1,0 +1,967 @@
+2022-04-06 08:53:45,832  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
+ 2022-04-06 08:53:46,344  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
+ 2022-04-06 08:53:46,352  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-04-06 08:53:46,357  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-04-06 08:53:46,360  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\
+ 2022-04-06 08:54:34,925  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
+ 2022-04-06 08:54:36,319  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (22ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-06 08:54:36,543  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (27ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[category] AS [Category]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__x_ResumeId_0
+ 2022-04-06 08:54:36,562  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 08:54:36,579  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 08:54:36,592  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 08:54:36,609  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 08:54:36,623  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 08:54:36,636  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (4ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId] AS [EducationDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 08:55:31,468  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
+ 2022-04-06 08:55:31,651  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-06 08:55:31,938  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (40ms) [Parameters=[@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (Size = 500) (DbType = AnsiString), @p2='?' (DbType = Int32), @p3='?' (Size = 200) (DbType = AnsiString), @p4='?' (Size = 50) (DbType = AnsiString), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 100) (DbType = AnsiString), @p8='?' (Size = 250) (DbType = AnsiString), @p9='?' (DbType = Double), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (Size = 500) (DbType = AnsiString), @p13='?' (Size = 100) (DbType = AnsiString), @p14='?' (Size = 200) (DbType = AnsiString), @p15='?' (Size = 50) (DbType = AnsiString), @p16='?' (DbType = Int32), @p17='?' (Size = 100) (DbType = AnsiString), @p18='?' (DbType = Int32), @p19='?' (DbType = Double), @p24='?' (DbType = Int32), @p20='?' (DbType = DateTime), @p21='?' (Size = 10) (DbType = AnsiString), @p22='?' (Size = 50) (DbType = AnsiString), @p23='?' (DbType = DateTime), @p25='?' (Size = 200) (DbType = AnsiString), @p26='?' (DbType = Int32), @p27='?' (Size = 8000) (DbType = AnsiString), @p28='?' (Size = 100) (DbType = AnsiString), @p29='?' (Size = 8000) (DbType = AnsiString), @p30='?' (DbType = Date), @p31='?' (Size = 50) (DbType = AnsiString), @p32='?' (Size = 50) (DbType = AnsiString), @p33='?' (Size = 50) (DbType = AnsiString), @p34='?' (DbType = Int32), @p35='?' (DbType = Date), @p36='?' (Size = 8000) (DbType = AnsiString)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AboutMe] ([keyPoints], [mainDescription], [resumeId])
+VALUES (@p0, @p1, @p2);
+SELECT [aboutMeId]
+FROM [AboutMe]
+WHERE @@ROWCOUNT = 1 AND [aboutMeId] = scope_identity();
+
+INSERT INTO [Achievements] ([achievementDesc], [achievementName], [achievementYear], [resumeId])
+VALUES (@p3, @p4, @p5, @p6);
+SELECT [achievementId]
+FROM [Achievements]
+WHERE @@ROWCOUNT = 1 AND [achievementId] = scope_identity();
+
+INSERT INTO [EducationDetails] ([courseName], [instituteName], [marks], [passingYear], [resumeId], [specialization], [university])
+VALUES (@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+SELECT [educationId]
+FROM [EducationDetails]
+WHERE @@ROWCOUNT = 1 AND [educationId] = scope_identity();
+
+INSERT INTO [Membership] ([membershipDesc], [membershipName], [resumeId])
+VALUES (@p14, @p15, @p16);
+SELECT [membershipId]
+FROM [Membership]
+WHERE @@ROWCOUNT = 1 AND [membershipId] = scope_identity();
+
+INSERT INTO [MyDetails] ([profilePicture], [resumeId], [totalExp])
+VALUES (@p17, @p18, @p19);
+SELECT [userdetailsId]
+FROM [MyDetails]
+WHERE @@ROWCOUNT = 1 AND [userdetailsId] = scope_identity();
+
+UPDATE [Resume] SET [creationDate] = @p20, [resumeStatus] = @p21, [resumeTitle] = @p22, [updationDate] = @p23
+WHERE [resumeId] = @p24;
+SELECT @@ROWCOUNT;
+
+INSERT INTO [Skills] ([category], [resumeID])
+VALUES (@p25, @p26);
+SELECT [skillId]
+FROM [Skills]
+WHERE @@ROWCOUNT = 1 AND [skillId] = scope_identity();
+
+INSERT INTO [WorkExperience] ([businessSolution], [clientDescription], [country], [endDate], [projectName], [projectResponsibilities], [projectRole], [resumeId], [startDate], [technologyStack])
+VALUES (@p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36);
+SELECT [workExperienceId]
+FROM [WorkExperience]
+WHERE @@ROWCOUNT = 1 AND [workExperienceId] = scope_identity();
+ 2022-04-06 08:55:32,119 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The UPDATE statement conflicted with the CHECK constraint "CK__Resume__resumeSt__2B3F6F97". The conflict occurred in database "RMS", table "dbo.Resume", column 'resumeStatus'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:56cf6cd6-78b8-40e1-864c-844e0d2799b1
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The UPDATE statement conflicted with the CHECK constraint "CK__Resume__resumeSt__2B3F6F97". The conflict occurred in database "RMS", table "dbo.Resume", column 'resumeStatus'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:56cf6cd6-78b8-40e1-864c-844e0d2799b1
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2022-04-06 08:56:57,946  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
+ 2022-04-06 08:56:58,023  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
+ 2022-04-06 08:56:58,029  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-04-06 08:56:58,033  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-04-06 08:56:58,036  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\
+ 2022-04-06 08:57:51,673  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
+ 2022-04-06 08:57:52,772  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (43ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-06 08:57:53,234  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (46ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[category] AS [Category]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__x_ResumeId_0
+ 2022-04-06 08:57:53,255  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 08:57:53,274  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 08:57:53,290  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 08:57:53,317  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 08:57:53,335  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 08:57:53,349  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId] AS [EducationDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 08:58:34,408  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
+ 2022-04-06 08:58:34,527  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-06 08:58:35,046  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (8ms) [Parameters=[@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (Size = 500) (DbType = AnsiString), @p2='?' (DbType = Int32), @p3='?' (Size = 200) (DbType = AnsiString), @p4='?' (Size = 50) (DbType = AnsiString), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 100) (DbType = AnsiString), @p8='?' (Size = 250) (DbType = AnsiString), @p9='?' (DbType = Double), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (Size = 500) (DbType = AnsiString), @p13='?' (Size = 100) (DbType = AnsiString), @p14='?' (Size = 200) (DbType = AnsiString), @p15='?' (Size = 50) (DbType = AnsiString), @p16='?' (DbType = Int32), @p17='?' (Size = 100) (DbType = AnsiString), @p18='?' (DbType = Int32), @p19='?' (DbType = Double), @p24='?' (DbType = Int32), @p20='?' (DbType = DateTime), @p21='?' (Size = 10) (DbType = AnsiString), @p22='?' (Size = 50) (DbType = AnsiString), @p23='?' (DbType = DateTime), @p25='?' (Size = 200) (DbType = AnsiString), @p26='?' (DbType = Int32), @p27='?' (Size = 8000) (DbType = AnsiString), @p28='?' (Size = 100) (DbType = AnsiString), @p29='?' (Size = 8000) (DbType = AnsiString), @p30='?' (DbType = Date), @p31='?' (Size = 50) (DbType = AnsiString), @p32='?' (Size = 50) (DbType = AnsiString), @p33='?' (Size = 50) (DbType = AnsiString), @p34='?' (DbType = Int32), @p35='?' (DbType = Date), @p36='?' (Size = 8000) (DbType = AnsiString)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AboutMe] ([keyPoints], [mainDescription], [resumeId])
+VALUES (@p0, @p1, @p2);
+SELECT [aboutMeId]
+FROM [AboutMe]
+WHERE @@ROWCOUNT = 1 AND [aboutMeId] = scope_identity();
+
+INSERT INTO [Achievements] ([achievementDesc], [achievementName], [achievementYear], [resumeId])
+VALUES (@p3, @p4, @p5, @p6);
+SELECT [achievementId]
+FROM [Achievements]
+WHERE @@ROWCOUNT = 1 AND [achievementId] = scope_identity();
+
+INSERT INTO [EducationDetails] ([courseName], [instituteName], [marks], [passingYear], [resumeId], [specialization], [university])
+VALUES (@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+SELECT [educationId]
+FROM [EducationDetails]
+WHERE @@ROWCOUNT = 1 AND [educationId] = scope_identity();
+
+INSERT INTO [Membership] ([membershipDesc], [membershipName], [resumeId])
+VALUES (@p14, @p15, @p16);
+SELECT [membershipId]
+FROM [Membership]
+WHERE @@ROWCOUNT = 1 AND [membershipId] = scope_identity();
+
+INSERT INTO [MyDetails] ([profilePicture], [resumeId], [totalExp])
+VALUES (@p17, @p18, @p19);
+SELECT [userdetailsId]
+FROM [MyDetails]
+WHERE @@ROWCOUNT = 1 AND [userdetailsId] = scope_identity();
+
+UPDATE [Resume] SET [creationDate] = @p20, [resumeStatus] = @p21, [resumeTitle] = @p22, [updationDate] = @p23
+WHERE [resumeId] = @p24;
+SELECT @@ROWCOUNT;
+
+INSERT INTO [Skills] ([category], [resumeID])
+VALUES (@p25, @p26);
+SELECT [skillId]
+FROM [Skills]
+WHERE @@ROWCOUNT = 1 AND [skillId] = scope_identity();
+
+INSERT INTO [WorkExperience] ([businessSolution], [clientDescription], [country], [endDate], [projectName], [projectResponsibilities], [projectRole], [resumeId], [startDate], [technologyStack])
+VALUES (@p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36);
+SELECT [workExperienceId]
+FROM [WorkExperience]
+WHERE @@ROWCOUNT = 1 AND [workExperienceId] = scope_identity();
+ 2022-04-06 08:58:35,208 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'RMS.dbo.WorkExperience', column 'country'. Truncated value: 'str'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:53e783e2-6af7-4b27-8645-956bc82d5360
+Error Number:2628,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'RMS.dbo.WorkExperience', column 'country'. Truncated value: 'str'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:53e783e2-6af7-4b27-8645-956bc82d5360
+Error Number:2628,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2022-04-06 09:00:25,302 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'RMS.dbo.WorkExperience', column 'country'. Truncated value: 'str'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:53e783e2-6af7-4b27-8645-956bc82d5360
+Error Number:2628,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at RmsWebApi.Repository.BaseRepository`1.Update(T entity) in E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\BaseRepository.cs:line 49
+   at RmsWebApi.Repository.ResumeRepository.Update(Int32 ResumeId, ResumeDomain resume) in E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\ResumeRepository.cs:line 254
+   at RmsWebApi.Controllers.API.Controller.ResumeController.Put(Int32 id, ResumeDomain resume) in E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\Controller\ResumeController.cs:line 42
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.<>c__DisplayClass33_0.<WrapVoidMethod>b__0(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.VoidResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-04-06 09:15:44,605  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
+ 2022-04-06 09:15:44,704  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
+ 2022-04-06 09:15:44,712  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-04-06 09:15:44,719  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-04-06 09:15:44,722  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\
+ 2022-04-06 09:16:08,217  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
+ 2022-04-06 09:16:09,770  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (48ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-06 09:16:10,548  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (68ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[category] AS [Category]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__x_ResumeId_0
+ 2022-04-06 09:16:10,584  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (4ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:16:10,605  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:16:10,621  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:16:10,653  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:16:10,674  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:16:10,689  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId] AS [EducationDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:16:56,375  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
+ 2022-04-06 09:16:56,525  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-06 09:16:57,062  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (26ms) [Parameters=[@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (Size = 500) (DbType = AnsiString), @p2='?' (DbType = Int32), @p3='?' (Size = 200) (DbType = AnsiString), @p4='?' (Size = 50) (DbType = AnsiString), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 100) (DbType = AnsiString), @p8='?' (Size = 250) (DbType = AnsiString), @p9='?' (DbType = Double), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (Size = 500) (DbType = AnsiString), @p13='?' (Size = 100) (DbType = AnsiString), @p14='?' (Size = 200) (DbType = AnsiString), @p15='?' (Size = 50) (DbType = AnsiString), @p16='?' (DbType = Int32), @p17='?' (Size = 100) (DbType = AnsiString), @p18='?' (DbType = Int32), @p19='?' (DbType = Double), @p24='?' (DbType = Int32), @p20='?' (DbType = DateTime), @p21='?' (Size = 10) (DbType = AnsiString), @p22='?' (Size = 50) (DbType = AnsiString), @p23='?' (DbType = DateTime), @p25='?' (Size = 200) (DbType = AnsiString), @p26='?' (DbType = Int32), @p27='?' (Size = 8000) (DbType = AnsiString), @p28='?' (Size = 100) (DbType = AnsiString), @p29='?' (Size = 8000) (DbType = AnsiString), @p30='?' (DbType = Date), @p31='?' (Size = 50) (DbType = AnsiString), @p32='?' (Size = 50) (DbType = AnsiString), @p33='?' (Size = 50) (DbType = AnsiString), @p34='?' (DbType = Int32), @p35='?' (DbType = Date), @p36='?' (Size = 8000) (DbType = AnsiString)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AboutMe] ([keyPoints], [mainDescription], [resumeId])
+VALUES (@p0, @p1, @p2);
+SELECT [aboutMeId]
+FROM [AboutMe]
+WHERE @@ROWCOUNT = 1 AND [aboutMeId] = scope_identity();
+
+INSERT INTO [Achievements] ([achievementDesc], [achievementName], [achievementYear], [resumeId])
+VALUES (@p3, @p4, @p5, @p6);
+SELECT [achievementId]
+FROM [Achievements]
+WHERE @@ROWCOUNT = 1 AND [achievementId] = scope_identity();
+
+INSERT INTO [EducationDetails] ([courseName], [instituteName], [marks], [passingYear], [resumeId], [specialization], [university])
+VALUES (@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+SELECT [educationId]
+FROM [EducationDetails]
+WHERE @@ROWCOUNT = 1 AND [educationId] = scope_identity();
+
+INSERT INTO [Membership] ([membershipDesc], [membershipName], [resumeId])
+VALUES (@p14, @p15, @p16);
+SELECT [membershipId]
+FROM [Membership]
+WHERE @@ROWCOUNT = 1 AND [membershipId] = scope_identity();
+
+INSERT INTO [MyDetails] ([profilePicture], [resumeId], [totalExp])
+VALUES (@p17, @p18, @p19);
+SELECT [userdetailsId]
+FROM [MyDetails]
+WHERE @@ROWCOUNT = 1 AND [userdetailsId] = scope_identity();
+
+UPDATE [Resume] SET [creationDate] = @p20, [resumeStatus] = @p21, [resumeTitle] = @p22, [updationDate] = @p23
+WHERE [resumeId] = @p24;
+SELECT @@ROWCOUNT;
+
+INSERT INTO [Skills] ([category], [resumeID])
+VALUES (@p25, @p26);
+SELECT [skillId]
+FROM [Skills]
+WHERE @@ROWCOUNT = 1 AND [skillId] = scope_identity();
+
+INSERT INTO [WorkExperience] ([businessSolution], [clientDescription], [country], [endDate], [projectName], [projectResponsibilities], [projectRole], [resumeId], [startDate], [technologyStack])
+VALUES (@p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36);
+SELECT [workExperienceId]
+FROM [WorkExperience]
+WHERE @@ROWCOUNT = 1 AND [workExperienceId] = scope_identity();
+ 2022-04-06 09:16:57,213 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'RMS.dbo.WorkExperience', column 'country'. Truncated value: 'str'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:1b3af931-f8cd-4fba-acdc-8056a98773c1
+Error Number:2628,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'RMS.dbo.WorkExperience', column 'country'. Truncated value: 'str'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:1b3af931-f8cd-4fba-acdc-8056a98773c1
+Error Number:2628,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2022-04-06 09:17:48,169 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'RMS.dbo.WorkExperience', column 'country'. Truncated value: 'str'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:1b3af931-f8cd-4fba-acdc-8056a98773c1
+Error Number:2628,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at RmsWebApi.Repository.BaseRepository`1.Update(T entity) in E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\BaseRepository.cs:line 49
+   at RmsWebApi.Repository.ResumeRepository.Update(Int32 ResumeId, ResumeDomain resume) in E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\ResumeRepository.cs:line 256
+   at RmsWebApi.Controllers.API.Controller.ResumeController.Put(Int32 id, ResumeDomain value) in E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\Controller\ResumeController.cs:line 42
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.<>c__DisplayClass33_0.<WrapVoidMethod>b__0(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.VoidResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-04-06 09:18:17,225  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
+ 2022-04-06 09:18:17,283 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (10ms) [Parameters=[@p0='?' (DbType = DateTime), @p1='?' (Size = 10) (DbType = AnsiString), @p2='?' (Size = 50) (DbType = AnsiString), @p3='?' (DbType = DateTime)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Resume] ([creationDate], [resumeStatus], [resumeTitle], [updationDate])
+VALUES (@p0, @p1, @p2, @p3);
+SELECT [resumeId]
+FROM [Resume]
+WHERE @@ROWCOUNT = 1 AND [resumeId] = scope_identity();
+ 2022-04-06 09:18:17,305 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the CHECK constraint "CK__Resume__resumeSt__2B3F6F97". The conflict occurred in database "RMS", table "dbo.Resume", column 'resumeStatus'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:1b3af931-f8cd-4fba-acdc-8056a98773c1
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the CHECK constraint "CK__Resume__resumeSt__2B3F6F97". The conflict occurred in database "RMS", table "dbo.Resume", column 'resumeStatus'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:1b3af931-f8cd-4fba-acdc-8056a98773c1
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2022-04-06 09:18:42,456 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the CHECK constraint "CK__Resume__resumeSt__2B3F6F97". The conflict occurred in database "RMS", table "dbo.Resume", column 'resumeStatus'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:1b3af931-f8cd-4fba-acdc-8056a98773c1
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at RmsWebApi.Repository.BaseRepository`1.Create(T entity) in E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\BaseRepository.cs:line 27
+   at RmsWebApi.Repository.ResumeRepository.Create(ResumeDomain resume) in E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\ResumeRepository.cs:line 164
+   at RmsWebApi.Controllers.API.Controller.ResumeController.Post(ResumeDomain value) in E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\Controller\ResumeController.cs:line 30
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.<>c__DisplayClass33_0.<WrapVoidMethod>b__0(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.VoidResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-04-06 09:19:04,823  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
+ 2022-04-06 09:19:04,865  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = DateTime), @p1='?' (Size = 10) (DbType = AnsiString), @p2='?' (Size = 50) (DbType = AnsiString), @p3='?' (DbType = DateTime)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Resume] ([creationDate], [resumeStatus], [resumeTitle], [updationDate])
+VALUES (@p0, @p1, @p2, @p3);
+SELECT [resumeId]
+FROM [Resume]
+WHERE @@ROWCOUNT = 1 AND [resumeId] = scope_identity();
+ 2022-04-06 09:19:04,899  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (14ms) [Parameters=[@p4='?' (Size = 100) (DbType = AnsiString), @p5='?' (Size = 250) (DbType = AnsiString), @p6='?' (DbType = Double), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32), @p9='?' (Size = 500) (DbType = AnsiString), @p10='?' (Size = 100) (DbType = AnsiString), @p11='?' (Size = 200) (DbType = AnsiString), @p12='?' (Size = 50) (DbType = AnsiString), @p13='?' (DbType = Int32), @p14='?' (Size = 100) (DbType = AnsiString), @p15='?' (DbType = Int32), @p16='?' (DbType = Double), @p17='?' (Size = 200) (DbType = AnsiString), @p18='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [EducationDetails] ([courseName], [instituteName], [marks], [passingYear], [resumeId], [specialization], [university])
+VALUES (@p4, @p5, @p6, @p7, @p8, @p9, @p10);
+SELECT [educationId]
+FROM [EducationDetails]
+WHERE @@ROWCOUNT = 1 AND [educationId] = scope_identity();
+
+INSERT INTO [Membership] ([membershipDesc], [membershipName], [resumeId])
+VALUES (@p11, @p12, @p13);
+SELECT [membershipId]
+FROM [Membership]
+WHERE @@ROWCOUNT = 1 AND [membershipId] = scope_identity();
+
+INSERT INTO [MyDetails] ([profilePicture], [resumeId], [totalExp])
+VALUES (@p14, @p15, @p16);
+SELECT [userdetailsId]
+FROM [MyDetails]
+WHERE @@ROWCOUNT = 1 AND [userdetailsId] = scope_identity();
+
+INSERT INTO [Skills] ([category], [resumeID])
+VALUES (@p17, @p18);
+SELECT [skillId]
+FROM [Skills]
+WHERE @@ROWCOUNT = 1 AND [skillId] = scope_identity();
+ 2022-04-06 09:19:13,664  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
+ 2022-04-06 09:19:13,698  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-06 09:19:13,809  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (96ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[category] AS [Category]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,818  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (4ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,829  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,842  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (4ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,854  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (7ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,863  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,875  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (5ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId] AS [EducationDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,882  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[category] AS [Category]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,892  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,901  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,907  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,915  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,923  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:19:13,929  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId] AS [EducationDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__x_ResumeId_0
+ 2022-04-06 09:19:57,145  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
+ 2022-04-06 09:19:57,157  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-06 09:19:57,191  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (27ms) [Parameters=[@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (Size = 500) (DbType = AnsiString), @p2='?' (DbType = Int32), @p3='?' (Size = 200) (DbType = AnsiString), @p4='?' (Size = 50) (DbType = AnsiString), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 100) (DbType = AnsiString), @p8='?' (Size = 250) (DbType = AnsiString), @p9='?' (DbType = Double), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (Size = 500) (DbType = AnsiString), @p13='?' (Size = 100) (DbType = AnsiString), @p14='?' (Size = 200) (DbType = AnsiString), @p15='?' (Size = 50) (DbType = AnsiString), @p16='?' (DbType = Int32), @p17='?' (Size = 100) (DbType = AnsiString), @p18='?' (DbType = Int32), @p19='?' (DbType = Double), @p24='?' (DbType = Int32), @p20='?' (DbType = DateTime), @p21='?' (Size = 10) (DbType = AnsiString), @p22='?' (Size = 50) (DbType = AnsiString), @p23='?' (DbType = DateTime), @p25='?' (Size = 200) (DbType = AnsiString), @p26='?' (DbType = Int32), @p27='?' (Size = 8000) (DbType = AnsiString), @p28='?' (Size = 100) (DbType = AnsiString), @p29='?' (Size = 8000) (DbType = AnsiString), @p30='?' (DbType = Date), @p31='?' (Size = 50) (DbType = AnsiString), @p32='?' (Size = 50) (DbType = AnsiString), @p33='?' (Size = 50) (DbType = AnsiString), @p34='?' (DbType = Int32), @p35='?' (DbType = Date), @p36='?' (Size = 8000) (DbType = AnsiString)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AboutMe] ([keyPoints], [mainDescription], [resumeId])
+VALUES (@p0, @p1, @p2);
+SELECT [aboutMeId]
+FROM [AboutMe]
+WHERE @@ROWCOUNT = 1 AND [aboutMeId] = scope_identity();
+
+INSERT INTO [Achievements] ([achievementDesc], [achievementName], [achievementYear], [resumeId])
+VALUES (@p3, @p4, @p5, @p6);
+SELECT [achievementId]
+FROM [Achievements]
+WHERE @@ROWCOUNT = 1 AND [achievementId] = scope_identity();
+
+INSERT INTO [EducationDetails] ([courseName], [instituteName], [marks], [passingYear], [resumeId], [specialization], [university])
+VALUES (@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+SELECT [educationId]
+FROM [EducationDetails]
+WHERE @@ROWCOUNT = 1 AND [educationId] = scope_identity();
+
+INSERT INTO [Membership] ([membershipDesc], [membershipName], [resumeId])
+VALUES (@p14, @p15, @p16);
+SELECT [membershipId]
+FROM [Membership]
+WHERE @@ROWCOUNT = 1 AND [membershipId] = scope_identity();
+
+INSERT INTO [MyDetails] ([profilePicture], [resumeId], [totalExp])
+VALUES (@p17, @p18, @p19);
+SELECT [userdetailsId]
+FROM [MyDetails]
+WHERE @@ROWCOUNT = 1 AND [userdetailsId] = scope_identity();
+
+UPDATE [Resume] SET [creationDate] = @p20, [resumeStatus] = @p21, [resumeTitle] = @p22, [updationDate] = @p23
+WHERE [resumeId] = @p24;
+SELECT @@ROWCOUNT;
+
+INSERT INTO [Skills] ([category], [resumeID])
+VALUES (@p25, @p26);
+SELECT [skillId]
+FROM [Skills]
+WHERE @@ROWCOUNT = 1 AND [skillId] = scope_identity();
+
+INSERT INTO [WorkExperience] ([businessSolution], [clientDescription], [country], [endDate], [projectName], [projectResponsibilities], [projectRole], [resumeId], [startDate], [technologyStack])
+VALUES (@p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36);
+SELECT [workExperienceId]
+FROM [WorkExperience]
+WHERE @@ROWCOUNT = 1 AND [workExperienceId] = scope_identity();
+ 2022-04-06 09:19:57,206 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'RMS.dbo.WorkExperience', column 'country'. Truncated value: 'str'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:1b3af931-f8cd-4fba-acdc-8056a98773c1
+Error Number:2628,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'RMS.dbo.WorkExperience', column 'country'. Truncated value: 'str'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:1b3af931-f8cd-4fba-acdc-8056a98773c1
+Error Number:2628,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2022-04-06 09:20:15,148 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'RMS.dbo.WorkExperience', column 'country'. Truncated value: 'str'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:1b3af931-f8cd-4fba-acdc-8056a98773c1
+Error Number:2628,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at RmsWebApi.Repository.BaseRepository`1.Update(T entity) in E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\BaseRepository.cs:line 49
+   at RmsWebApi.Repository.ResumeRepository.Update(Int32 ResumeId, ResumeDomain resume) in E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\ResumeRepository.cs:line 256
+   at RmsWebApi.Controllers.API.Controller.ResumeController.Put(Int32 id, ResumeDomain value) in E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\Controller\ResumeController.cs:line 42
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.<>c__DisplayClass33_0.<WrapVoidMethod>b__0(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.VoidResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-04-06 09:21:39,708  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
+ 2022-04-06 09:21:39,716  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-06 09:21:39,759  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (33ms) [Parameters=[@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (Size = 500) (DbType = AnsiString), @p2='?' (DbType = Int32), @p3='?' (Size = 200) (DbType = AnsiString), @p4='?' (Size = 50) (DbType = AnsiString), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 100) (DbType = AnsiString), @p8='?' (Size = 250) (DbType = AnsiString), @p9='?' (DbType = Double), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (Size = 500) (DbType = AnsiString), @p13='?' (Size = 100) (DbType = AnsiString), @p14='?' (Size = 200) (DbType = AnsiString), @p15='?' (Size = 50) (DbType = AnsiString), @p16='?' (DbType = Int32), @p17='?' (Size = 100) (DbType = AnsiString), @p18='?' (DbType = Int32), @p19='?' (DbType = Double), @p24='?' (DbType = Int32), @p20='?' (DbType = DateTime), @p21='?' (Size = 10) (DbType = AnsiString), @p22='?' (Size = 50) (DbType = AnsiString), @p23='?' (DbType = DateTime), @p25='?' (Size = 200) (DbType = AnsiString), @p26='?' (DbType = Int32), @p27='?' (Size = 8000) (DbType = AnsiString), @p28='?' (Size = 100) (DbType = AnsiString), @p29='?' (Size = 8000) (DbType = AnsiString), @p30='?' (DbType = Date), @p31='?' (Size = 50) (DbType = AnsiString), @p32='?' (Size = 50) (DbType = AnsiString), @p33='?' (Size = 50) (DbType = AnsiString), @p34='?' (DbType = Int32), @p35='?' (DbType = Date), @p36='?' (Size = 8000) (DbType = AnsiString)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AboutMe] ([keyPoints], [mainDescription], [resumeId])
+VALUES (@p0, @p1, @p2);
+SELECT [aboutMeId]
+FROM [AboutMe]
+WHERE @@ROWCOUNT = 1 AND [aboutMeId] = scope_identity();
+
+INSERT INTO [Achievements] ([achievementDesc], [achievementName], [achievementYear], [resumeId])
+VALUES (@p3, @p4, @p5, @p6);
+SELECT [achievementId]
+FROM [Achievements]
+WHERE @@ROWCOUNT = 1 AND [achievementId] = scope_identity();
+
+INSERT INTO [EducationDetails] ([courseName], [instituteName], [marks], [passingYear], [resumeId], [specialization], [university])
+VALUES (@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+SELECT [educationId]
+FROM [EducationDetails]
+WHERE @@ROWCOUNT = 1 AND [educationId] = scope_identity();
+
+INSERT INTO [Membership] ([membershipDesc], [membershipName], [resumeId])
+VALUES (@p14, @p15, @p16);
+SELECT [membershipId]
+FROM [Membership]
+WHERE @@ROWCOUNT = 1 AND [membershipId] = scope_identity();
+
+INSERT INTO [MyDetails] ([profilePicture], [resumeId], [totalExp])
+VALUES (@p17, @p18, @p19);
+SELECT [userdetailsId]
+FROM [MyDetails]
+WHERE @@ROWCOUNT = 1 AND [userdetailsId] = scope_identity();
+
+UPDATE [Resume] SET [creationDate] = @p20, [resumeStatus] = @p21, [resumeTitle] = @p22, [updationDate] = @p23
+WHERE [resumeId] = @p24;
+SELECT @@ROWCOUNT;
+
+INSERT INTO [Skills] ([category], [resumeID])
+VALUES (@p25, @p26);
+SELECT [skillId]
+FROM [Skills]
+WHERE @@ROWCOUNT = 1 AND [skillId] = scope_identity();
+
+INSERT INTO [WorkExperience] ([businessSolution], [clientDescription], [country], [endDate], [projectName], [projectResponsibilities], [projectRole], [resumeId], [startDate], [technologyStack])
+VALUES (@p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36);
+SELECT [workExperienceId]
+FROM [WorkExperience]
+WHERE @@ROWCOUNT = 1 AND [workExperienceId] = scope_identity();
+ 2022-04-06 09:21:39,772 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'RMS.dbo.WorkExperience', column 'country'. Truncated value: 'str'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:1b3af931-f8cd-4fba-acdc-8056a98773c1
+Error Number:2628,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated in table 'RMS.dbo.WorkExperience', column 'country'. Truncated value: 'str'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:1b3af931-f8cd-4fba-acdc-8056a98773c1
+Error Number:2628,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)

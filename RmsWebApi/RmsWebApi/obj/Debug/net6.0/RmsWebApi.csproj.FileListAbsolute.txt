@@ -120,3 +120,7 @@ E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\refint\Rms
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.pdb
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.genruntimeconfig.cache
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\ref\RmsWebApi.dll
+E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\log4net.config
+E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\log4net.dll
+E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
+E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Newtonsoft.Json.dll

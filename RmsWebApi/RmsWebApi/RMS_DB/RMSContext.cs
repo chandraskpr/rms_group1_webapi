@@ -30,11 +30,11 @@ namespace RmsWebApi.RMS_DB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            /*if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=PS-WIN-LP-517\\SQLEXPRESS;Database=RMS;Trusted_Connection=True;");
-            }
+            }*/
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -225,7 +225,8 @@ namespace RmsWebApi.RMS_DB
                     .IsUnique();
 
                 entity.Property(e => e.UserId)
-                    .ValueGeneratedNever()
+                    //.ValueGeneratedNever()
+                    .UseIdentityColumn()
                     .HasColumnName("userId");
 
                 entity.Property(e => e.UserEmail)

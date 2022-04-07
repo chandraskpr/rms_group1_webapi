@@ -2,8 +2,13 @@ using Microsoft.EntityFrameworkCore;
 using RmsWebApi.Repository;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
+using static RmsWebApi.GlobalErrorMiddleware;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Logging file
+
+builder.Logging.AddLog4Net(new Log4NetProviderOptions("log4net.config"));
 
 // Add services to the container.
 
@@ -16,6 +21,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
 
 builder.Services.AddControllers();
+
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -34,6 +40,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<RmsWebApi.GlobalErrorMiddleware>();
 
 app.MapControllers();
 
