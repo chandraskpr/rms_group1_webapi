@@ -1,4 +1,5 @@
-﻿using RmsWebApi.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using RmsWebApi.Data;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
 
@@ -63,9 +64,9 @@ namespace RmsWebApi.Repository
 
         public void Delete(int UserId)
         {
-            var user = base.SelectAll().FirstOrDefault(x => x.UserId == UserId);
-            base.Delete(user);
-
+            var res = this.entitySet
+                .Include(x => x.UserResumes)
+                .FirstOrDefault(x => x.UserId == UserId);
         }
 
         public void Update(int UserId, UserInfoDomain userInfo)
