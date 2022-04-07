@@ -3,6 +3,8 @@ using RmsWebApi.Data;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
 using RMS.Domain;
+using Microsoft.EntityFrameworkCore;
+
 namespace RmsWebApi.Repository
 {
     public class UserRepository : BaseRepository<UserInfo> , IUserRepository
@@ -22,24 +24,24 @@ namespace RmsWebApi.Repository
                 UserEmail = x.UserEmail,
                 UserRole = x.UserRole,
 
-               userResumeList = x.UserResumes.Select(x => new UserResumeDomain()
-               {
-                   UserResumeId = x.UserResumeId,
-                   UserId = x.UserId,
-                   ResumeId = x.ResumeId,
-                   
-                 
-               }).ToList(),
+                userResumeList = x.UserResumes.Select(x => new UserResumeDomain()
+                {
+                    UserResumeId = x.UserResumeId,
+                    UserId = x.UserId,
+                    ResumeId = x.ResumeId,
 
-               //NotificationList=x.UserNotifications.Select(x =>new UserNotificationsDomain()
-               //{
-               //    NotificationId = x.NotificationId,
-               //    UserId=x.UserId,
-               //    NotificationDescription = x.NotificationDescription,
-               //    NotificationState = x.NotificationState,
-               //    CreationDate = x.CreationDate,
 
-               //}).ToList(),
+                }).ToList(),
+
+                NotificationList = x.UserNotifications.Select(x => new UserNotificationsDomain()
+                {
+                    NotificationId = x.NotificationId,
+                    UserId = x.UserId,
+                    NotificationDescription = x.NotificationDescription,
+                    NotificationState = x.NotificationState,
+                    CreationDate = x.CreationDate,
+
+                }).ToList(),
 
             }).ToList();
             return records;
@@ -54,27 +56,27 @@ namespace RmsWebApi.Repository
                 UserRole = userInfo.UserRole,
 
             };
-            foreach(var res in userInfo.userResumeList)
+            foreach (var res in userInfo.userResumeList)
             {
                 user.UserResumes.Add(new UserResume()
                 {
-                    UserId=res.UserId,
-                    ResumeId=res.ResumeId,
-                    UserResumeId=res.UserResumeId
+                    UserId = res.UserId,
+                    ResumeId = res.ResumeId,
+                    UserResumeId = res.UserResumeId
                 });
             }
 
-            //foreach (var res in userInfo.NotificationList)
-            //{
-            //    user.UserNotifications.Add(new UserNotification()
-            //    {
-            //       UserId = res.UserId,
-            //       NotificationId=res.NotificationId,
-            //       NotificationDescription = res.NotificationDescription,
-            //       NotificationState=res.NotificationState,
-            //       CreationDate=res.CreationDate,
-            //    });
-            //}
+            foreach (var res in userInfo.NotificationList)
+            {
+                user.UserNotifications.Add(new UserNotification()
+                {
+                    UserId = res.UserId,
+                    NotificationId = res.NotificationId,
+                    NotificationDescription = res.NotificationDescription,
+                    NotificationState = res.NotificationState,
+                    CreationDate = res.CreationDate,
+                });
+            }
             base.Create(user);
            
         }
@@ -82,9 +84,13 @@ namespace RmsWebApi.Repository
 
         public void Delete(int UserId )
         {
-            var user = base.SelectAll().FirstOrDefault(x => x.UserId==UserId);
-            if (user != null)
-                base.Delete(user);
+            var res = this.entitySet
+                   .Include(x => x.UserNotifications)
+                   .Include(x => x.UserResumes)
+                   
+                   .FirstOrDefault(x => x.UserId == UserId);
+            if (res != null)
+                base.Delete(res);
             
         }
 
@@ -108,17 +114,17 @@ namespace RmsWebApi.Repository
                     });
                 }
 
-                //foreach (var res in userInfo.NotificationList)
-                //{
-                //    user.UserNotifications.Add(new UserNotification()
-                //    {
-                //        UserId = res.UserId,
-                //        NotificationId = res.NotificationId,
-                //        NotificationDescription = res.NotificationDescription,
-                //        NotificationState = res.NotificationState,
-                //        CreationDate = res.CreationDate,
-                //    });
-                //}
+                foreach (var res in userInfo.NotificationList)
+                {
+                    user.UserNotifications.Add(new UserNotification()
+                    {
+                        UserId = res.UserId,
+                        NotificationId = res.NotificationId,
+                        NotificationDescription = res.NotificationDescription,
+                        NotificationState = res.NotificationState,
+                        CreationDate = res.CreationDate,
+                    });
+                }
 
                 base.Update(user);
                

@@ -1,4 +1,5 @@
-﻿using RmsWebApi.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using RmsWebApi.Data;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
 
@@ -76,6 +77,13 @@ namespace RmsWebApi.Repository
                     PassingYear = d.PassingYear,
                     Marks = (float)d.Marks,
                     University = d.University,
+                }).ToList(),
+
+                userResumes = x.UserResumes.Select(p =>new UserResumeDomain()
+                {
+                    UserId = p.UserId,
+                    ResumeId = p.ResumeId,
+                    UserResumeId = p.UserResumeId,
                 }).ToList(),
 
             }).ToList();
@@ -161,15 +169,36 @@ namespace RmsWebApi.Repository
                     University = record.University,
                 });
             }
+
+            foreach(var record in resume.userResumes)
+            {
+                res.UserResumes.Add(new UserResume()
+                {
+                    UserId = record.UserId,
+                    ResumeId = record.ResumeId,
+                    UserResumeId = record.UserResumeId,
+                });
+            }
             base.Create(res);       
         }
 
 
         public void Delete(int ResumeId)
         {
-            var res = base.SelectAll().FirstOrDefault(x => x.ResumeId == ResumeId);
-            
-            if(res!= null)
+            //var res = base.SelectAll().FirstOrDefault(x => x.ResumeId == ResumeId);
+            var res = this.entitySet
+                .Include(x => x.MyDetails)
+                .Include(x => x.Memberships)
+                .Include(x => x.AboutMes)
+                .Include(x => x.Achievements)
+                .Include(x => x.EducationDetails)
+                .Include(x => x.Skills)
+                .Include(x => x.WorkExperiences)
+                .Include(x => x.MyDetails)
+                .Include(x =>x.UserResumes)
+                .FirstOrDefault(x => x.ResumeId == ResumeId);
+
+            if (res!= null)
                 base.Delete(res);
 
         }
@@ -255,6 +284,15 @@ namespace RmsWebApi.Repository
                     });
                 }
 
+                foreach (var record in resume.userResumes)
+                {
+                    res.UserResumes.Add(new UserResume()
+                    {
+                        UserId = record.UserId,
+                        ResumeId = record.ResumeId,
+                        UserResumeId = record.UserResumeId,
+                    });
+                }
                 base.Update(res);
                 
             }

@@ -376,6 +376,6 @@ namespace RmsWebApi.RMS_DB
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
-        public DbSet<RmsWebApi.Data.UserInfoDomain> UserInfoDomain { get; set; }
+
     }
 }
