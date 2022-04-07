@@ -1,4 +1,395 @@
-2022-04-05 18:22:45,499 ERROR RmsWebApi.GlobalErrorMiddleware.HandleException [29] - MESSAGE: Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+2022-04-07 11:56:13,529  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
+ 2022-04-07 11:56:13,795  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
+ 2022-04-07 11:56:13,799  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-04-07 11:56:13,802  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-04-07 11:56:13,804  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
+ 2022-04-07 11:58:55,944  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: using lazy loading proxies 
+ 2022-04-07 11:58:56,838  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (20ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-07 12:02:26,325  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: using lazy loading proxies 
+ 2022-04-07 12:02:26,809  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (22ms) [Parameters=[@p0='?' (DbType = DateTime), @p1='?' (Size = 10) (DbType = AnsiString), @p2='?' (Size = 50) (DbType = AnsiString), @p3='?' (DbType = DateTime)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Resume] ([creationDate], [resumeStatus], [resumeTitle], [updationDate])
+VALUES (@p0, @p1, @p2, @p3);
+SELECT [resumeId]
+FROM [Resume]
+WHERE @@ROWCOUNT = 1 AND [resumeId] = scope_identity();
+ 2022-04-07 12:02:26,873  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (25ms) [Parameters=[@p4='?' (Size = 100) (DbType = AnsiString), @p5='?' (Size = 500) (DbType = AnsiString), @p6='?' (DbType = Int32), @p7='?' (Size = 200) (DbType = AnsiString), @p8='?' (Size = 50) (DbType = AnsiString), @p9='?' (DbType = Int32), @p10='?' (DbType = Int32), @p11='?' (Size = 100) (DbType = AnsiString), @p12='?' (Size = 250) (DbType = AnsiString), @p13='?' (DbType = Double), @p14='?' (DbType = Int32), @p15='?' (DbType = Int32), @p16='?' (Size = 500) (DbType = AnsiString), @p17='?' (Size = 100) (DbType = AnsiString), @p18='?' (Size = 200) (DbType = AnsiString), @p19='?' (Size = 50) (DbType = AnsiString), @p20='?' (DbType = Int32), @p21='?' (Size = 100) (DbType = AnsiString), @p22='?' (DbType = Int32), @p23='?' (DbType = Double), @p24='?' (Size = 200) (DbType = AnsiString), @p25='?' (DbType = Int32), @p26='?' (Size = 200) (DbType = AnsiString), @p27='?' (DbType = Int32), @p28='?' (Size = 8000) (DbType = AnsiString), @p29='?' (Size = 100) (DbType = AnsiString), @p30='?' (Size = 3) (DbType = AnsiString), @p31='?' (DbType = Date), @p32='?' (Size = 50) (DbType = AnsiString), @p33='?' (Size = 50) (DbType = AnsiString), @p34='?' (Size = 50) (DbType = AnsiString), @p35='?' (DbType = Int32), @p36='?' (DbType = Date), @p37='?' (Size = 8000) (DbType = AnsiString)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AboutMe] ([keyPoints], [mainDescription], [resumeId])
+VALUES (@p4, @p5, @p6);
+SELECT [aboutMeId]
+FROM [AboutMe]
+WHERE @@ROWCOUNT = 1 AND [aboutMeId] = scope_identity();
+
+INSERT INTO [Achievements] ([achievementDesc], [achievementName], [achievementYear], [resumeId])
+VALUES (@p7, @p8, @p9, @p10);
+SELECT [achievementId]
+FROM [Achievements]
+WHERE @@ROWCOUNT = 1 AND [achievementId] = scope_identity();
+
+INSERT INTO [EducationDetails] ([courseName], [instituteName], [marks], [passingYear], [resumeId], [specialization], [university])
+VALUES (@p11, @p12, @p13, @p14, @p15, @p16, @p17);
+SELECT [educationId]
+FROM [EducationDetails]
+WHERE @@ROWCOUNT = 1 AND [educationId] = scope_identity();
+
+INSERT INTO [Membership] ([membershipDesc], [membershipName], [resumeId])
+VALUES (@p18, @p19, @p20);
+SELECT [membershipId]
+FROM [Membership]
+WHERE @@ROWCOUNT = 1 AND [membershipId] = scope_identity();
+
+INSERT INTO [MyDetails] ([profilePicture], [resumeId], [totalExp])
+VALUES (@p21, @p22, @p23);
+SELECT [userdetailsId]
+FROM [MyDetails]
+WHERE @@ROWCOUNT = 1 AND [userdetailsId] = scope_identity();
+
+DECLARE @inserted5 TABLE ([skillId] int, [_Position] [int]);
+MERGE [Skills] USING (
+VALUES (@p24, @p25, 0),
+(@p26, @p27, 1)) AS i ([category], [resumeID], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([category], [resumeID])
+VALUES (i.[category], i.[resumeID])
+OUTPUT INSERTED.[skillId], i._Position
+INTO @inserted5;
+
+SELECT [i].[skillId] FROM @inserted5 i
+ORDER BY [i].[_Position];
+
+INSERT INTO [WorkExperience] ([businessSolution], [clientDescription], [country], [endDate], [projectName], [projectResponsibilities], [projectRole], [resumeId], [startDate], [technologyStack])
+VALUES (@p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36, @p37);
+SELECT [workExperienceId]
+FROM [WorkExperience]
+WHERE @@ROWCOUNT = 1 AND [workExperienceId] = scope_identity();
+ 2022-04-07 12:02:41,178  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: using lazy loading proxies 
+ 2022-04-07 12:02:41,182  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-07 12:02:41,274  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (4ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[skillId], [s].[category], [s].[resumeID]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__p_0
+ 2022-04-07 12:02:41,286  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[aboutMeId], [a].[keyPoints], [a].[mainDescription], [a].[resumeId]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:02:41,298  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (4ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementId], [a].[achievementDesc], [a].[achievementName], [a].[achievementYear], [a].[resumeId]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:02:41,312  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipId], [m].[membershipDesc], [m].[membershipName], [m].[resumeId]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:02:41,324  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (4ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[userdetailsId], [m].[profilePicture], [m].[resumeId], [m].[totalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:02:41,335  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[workExperienceId], [w].[businessSolution], [w].[clientDescription], [w].[country], [w].[endDate], [w].[projectName], [w].[projectResponsibilities], [w].[projectRole], [w].[resumeId], [w].[startDate], [w].[technologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__p_0
+ 2022-04-07 12:02:41,348  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId], [e].[courseName], [e].[instituteName], [e].[marks], [e].[passingYear], [e].[resumeId], [e].[specialization], [e].[university]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__p_0
+ 2022-04-07 12:02:55,732  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: using lazy loading proxies 
+ 2022-04-07 12:02:55,745  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-07 12:02:55,750  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[skillId], [s].[category], [s].[resumeID]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__p_0
+ 2022-04-07 12:02:55,760  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[aboutMeId], [a].[keyPoints], [a].[mainDescription], [a].[resumeId]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:02:55,763  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[userdetailsId], [m].[profilePicture], [m].[resumeId], [m].[totalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:02:55,766  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementId], [a].[achievementDesc], [a].[achievementName], [a].[achievementYear], [a].[resumeId]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:02:55,772  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipId], [m].[membershipDesc], [m].[membershipName], [m].[resumeId]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:02:55,775  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[workExperienceId], [w].[businessSolution], [w].[clientDescription], [w].[country], [w].[endDate], [w].[projectName], [w].[projectResponsibilities], [w].[projectRole], [w].[resumeId], [w].[startDate], [w].[technologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__p_0
+ 2022-04-07 12:02:55,778  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId], [e].[courseName], [e].[instituteName], [e].[marks], [e].[passingYear], [e].[resumeId], [e].[specialization], [e].[university]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__p_0
+ 2022-04-07 12:02:55,795  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (10ms) [Parameters=[@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (Size = 500) (DbType = AnsiString), @p2='?' (DbType = Int32), @p3='?' (Size = 200) (DbType = AnsiString), @p4='?' (Size = 50) (DbType = AnsiString), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 100) (DbType = AnsiString), @p8='?' (Size = 250) (DbType = AnsiString), @p9='?' (DbType = Double), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (Size = 500) (DbType = AnsiString), @p13='?' (Size = 100) (DbType = AnsiString), @p14='?' (Size = 200) (DbType = AnsiString), @p15='?' (Size = 50) (DbType = AnsiString), @p16='?' (DbType = Int32), @p17='?' (Size = 100) (DbType = AnsiString), @p18='?' (DbType = Int32), @p19='?' (DbType = Double), @p24='?' (DbType = Int32), @p20='?' (DbType = DateTime), @p21='?' (Size = 10) (DbType = AnsiString), @p22='?' (Size = 50) (DbType = AnsiString), @p23='?' (DbType = DateTime), @p25='?' (Size = 200) (DbType = AnsiString), @p26='?' (DbType = Int32), @p27='?' (Size = 8000) (DbType = AnsiString), @p28='?' (Size = 100) (DbType = AnsiString), @p29='?' (Size = 8000) (DbType = AnsiString), @p30='?' (DbType = Date), @p31='?' (Size = 50) (DbType = AnsiString), @p32='?' (Size = 50) (DbType = AnsiString), @p33='?' (Size = 50) (DbType = AnsiString), @p34='?' (DbType = Int32), @p35='?' (DbType = Date), @p36='?' (Size = 8000) (DbType = AnsiString)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AboutMe] ([keyPoints], [mainDescription], [resumeId])
+VALUES (@p0, @p1, @p2);
+SELECT [aboutMeId]
+FROM [AboutMe]
+WHERE @@ROWCOUNT = 1 AND [aboutMeId] = scope_identity();
+
+INSERT INTO [Achievements] ([achievementDesc], [achievementName], [achievementYear], [resumeId])
+VALUES (@p3, @p4, @p5, @p6);
+SELECT [achievementId]
+FROM [Achievements]
+WHERE @@ROWCOUNT = 1 AND [achievementId] = scope_identity();
+
+INSERT INTO [EducationDetails] ([courseName], [instituteName], [marks], [passingYear], [resumeId], [specialization], [university])
+VALUES (@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+SELECT [educationId]
+FROM [EducationDetails]
+WHERE @@ROWCOUNT = 1 AND [educationId] = scope_identity();
+
+INSERT INTO [Membership] ([membershipDesc], [membershipName], [resumeId])
+VALUES (@p14, @p15, @p16);
+SELECT [membershipId]
+FROM [Membership]
+WHERE @@ROWCOUNT = 1 AND [membershipId] = scope_identity();
+
+INSERT INTO [MyDetails] ([profilePicture], [resumeId], [totalExp])
+VALUES (@p17, @p18, @p19);
+SELECT [userdetailsId]
+FROM [MyDetails]
+WHERE @@ROWCOUNT = 1 AND [userdetailsId] = scope_identity();
+
+UPDATE [Resume] SET [creationDate] = @p20, [resumeStatus] = @p21, [resumeTitle] = @p22, [updationDate] = @p23
+WHERE [resumeId] = @p24;
+SELECT @@ROWCOUNT;
+
+INSERT INTO [Skills] ([category], [resumeID])
+VALUES (@p25, @p26);
+SELECT [skillId]
+FROM [Skills]
+WHERE @@ROWCOUNT = 1 AND [skillId] = scope_identity();
+
+INSERT INTO [WorkExperience] ([businessSolution], [clientDescription], [country], [endDate], [projectName], [projectResponsibilities], [projectRole], [resumeId], [startDate], [technologyStack])
+VALUES (@p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36);
+SELECT [workExperienceId]
+FROM [WorkExperience]
+WHERE @@ROWCOUNT = 1 AND [workExperienceId] = scope_identity();
+ 2022-04-07 12:02:55,825 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The UPDATE statement conflicted with the CHECK constraint "CK__Resume__resumeSt__2B3F6F97". The conflict occurred in database "RMS", table "dbo.Resume", column 'resumeStatus'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:ae13c408-e515-4de2-9b25-c03ada84a58c
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The UPDATE statement conflicted with the CHECK constraint "CK__Resume__resumeSt__2B3F6F97". The conflict occurred in database "RMS", table "dbo.Resume", column 'resumeStatus'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:ae13c408-e515-4de2-9b25-c03ada84a58c
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2022-04-07 12:03:15,916 ERROR RmsWebApi.GlobalErrorMiddleware.HandleException [29] - MESSAGE: Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The UPDATE statement conflicted with the CHECK constraint "CK__Resume__resumeSt__2B3F6F97". The conflict occurred in database "RMS", table "dbo.Resume", column 'resumeStatus'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreResults(Boolean& moreResults)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryNextResult(Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.NextResult()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:ae13c408-e515-4de2-9b25-c03ada84a58c
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at RmsWebApi.Repository.BaseRepository`1.Update(T entity) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\BaseRepository.cs:line 45
+   at RmsWebApi.Repository.ResumeRepository.Update(Int32 ResumeId, ResumeDomain resume) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\ResumeRepository.cs:line 258
+   at RmsWebApi.Controllers.API.Controller.ResumeController.Put(Int32 id, ResumeDomain value) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\Controllers\ResumeController.cs:line 42
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.<>c__DisplayClass33_0.<WrapVoidMethod>b__0(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.VoidResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at RmsWebApi.GlobalErrorMiddleware.Invoke(HttpContext context, ILogger`1 logger) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\GlobalErrorMiddleware.cs:line 18
+ 2022-04-07 12:04:13,550  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: using lazy loading proxies 
+ 2022-04-07 12:04:13,585  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-07 12:04:13,590  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[skillId], [s].[category], [s].[resumeID]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__p_0
+ 2022-04-07 12:04:13,594  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[aboutMeId], [a].[keyPoints], [a].[mainDescription], [a].[resumeId]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:04:13,599  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[userdetailsId], [m].[profilePicture], [m].[resumeId], [m].[totalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:04:13,605  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementId], [a].[achievementDesc], [a].[achievementName], [a].[achievementYear], [a].[resumeId]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:04:13,610  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipId], [m].[membershipDesc], [m].[membershipName], [m].[resumeId]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:04:13,614  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[workExperienceId], [w].[businessSolution], [w].[clientDescription], [w].[country], [w].[endDate], [w].[projectName], [w].[projectResponsibilities], [w].[projectRole], [w].[resumeId], [w].[startDate], [w].[technologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__p_0
+ 2022-04-07 12:04:13,618  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId], [e].[courseName], [e].[instituteName], [e].[marks], [e].[passingYear], [e].[resumeId], [e].[specialization], [e].[university]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__p_0
+ 2022-04-07 12:04:13,632  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (10ms) [Parameters=[@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (Size = 500) (DbType = AnsiString), @p2='?' (DbType = Int32), @p3='?' (Size = 200) (DbType = AnsiString), @p4='?' (Size = 50) (DbType = AnsiString), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 100) (DbType = AnsiString), @p8='?' (Size = 250) (DbType = AnsiString), @p9='?' (DbType = Double), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (Size = 500) (DbType = AnsiString), @p13='?' (Size = 100) (DbType = AnsiString), @p14='?' (Size = 200) (DbType = AnsiString), @p15='?' (Size = 50) (DbType = AnsiString), @p16='?' (DbType = Int32), @p17='?' (Size = 100) (DbType = AnsiString), @p18='?' (DbType = Int32), @p19='?' (DbType = Double), @p24='?' (DbType = Int32), @p20='?' (DbType = DateTime), @p21='?' (Size = 10) (DbType = AnsiString), @p22='?' (Size = 50) (DbType = AnsiString), @p23='?' (DbType = DateTime), @p25='?' (Size = 200) (DbType = AnsiString), @p26='?' (DbType = Int32), @p27='?' (Size = 8000) (DbType = AnsiString), @p28='?' (Size = 100) (DbType = AnsiString), @p29='?' (Size = 3) (DbType = AnsiString), @p30='?' (DbType = Date), @p31='?' (Size = 50) (DbType = AnsiString), @p32='?' (Size = 50) (DbType = AnsiString), @p33='?' (Size = 50) (DbType = AnsiString), @p34='?' (DbType = Int32), @p35='?' (DbType = Date), @p36='?' (Size = 8000) (DbType = AnsiString)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AboutMe] ([keyPoints], [mainDescription], [resumeId])
+VALUES (@p0, @p1, @p2);
+SELECT [aboutMeId]
+FROM [AboutMe]
+WHERE @@ROWCOUNT = 1 AND [aboutMeId] = scope_identity();
+
+INSERT INTO [Achievements] ([achievementDesc], [achievementName], [achievementYear], [resumeId])
+VALUES (@p3, @p4, @p5, @p6);
+SELECT [achievementId]
+FROM [Achievements]
+WHERE @@ROWCOUNT = 1 AND [achievementId] = scope_identity();
+
+INSERT INTO [EducationDetails] ([courseName], [instituteName], [marks], [passingYear], [resumeId], [specialization], [university])
+VALUES (@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+SELECT [educationId]
+FROM [EducationDetails]
+WHERE @@ROWCOUNT = 1 AND [educationId] = scope_identity();
+
+INSERT INTO [Membership] ([membershipDesc], [membershipName], [resumeId])
+VALUES (@p14, @p15, @p16);
+SELECT [membershipId]
+FROM [Membership]
+WHERE @@ROWCOUNT = 1 AND [membershipId] = scope_identity();
+
+INSERT INTO [MyDetails] ([profilePicture], [resumeId], [totalExp])
+VALUES (@p17, @p18, @p19);
+SELECT [userdetailsId]
+FROM [MyDetails]
+WHERE @@ROWCOUNT = 1 AND [userdetailsId] = scope_identity();
+
+UPDATE [Resume] SET [creationDate] = @p20, [resumeStatus] = @p21, [resumeTitle] = @p22, [updationDate] = @p23
+WHERE [resumeId] = @p24;
+SELECT @@ROWCOUNT;
+
+INSERT INTO [Skills] ([category], [resumeID])
+VALUES (@p25, @p26);
+SELECT [skillId]
+FROM [Skills]
+WHERE @@ROWCOUNT = 1 AND [skillId] = scope_identity();
+
+INSERT INTO [WorkExperience] ([businessSolution], [clientDescription], [country], [endDate], [projectName], [projectResponsibilities], [projectRole], [resumeId], [startDate], [technologyStack])
+VALUES (@p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36);
+SELECT [workExperienceId]
+FROM [WorkExperience]
+WHERE @@ROWCOUNT = 1 AND [workExperienceId] = scope_identity();
+ 2022-04-07 12:04:22,759  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: using lazy loading proxies 
+ 2022-04-07 12:04:22,764  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-07 12:04:22,770  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[skillId], [s].[category], [s].[resumeID]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__p_0
+ 2022-04-07 12:04:22,776  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[aboutMeId], [a].[keyPoints], [a].[mainDescription], [a].[resumeId]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:04:22,779  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementId], [a].[achievementDesc], [a].[achievementName], [a].[achievementYear], [a].[resumeId]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:04:22,781  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipId], [m].[membershipDesc], [m].[membershipName], [m].[resumeId]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:04:22,784  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[userdetailsId], [m].[profilePicture], [m].[resumeId], [m].[totalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:04:22,788  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[workExperienceId], [w].[businessSolution], [w].[clientDescription], [w].[country], [w].[endDate], [w].[projectName], [w].[projectResponsibilities], [w].[projectRole], [w].[resumeId], [w].[startDate], [w].[technologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__p_0
+ 2022-04-07 12:04:22,793  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId], [e].[courseName], [e].[instituteName], [e].[marks], [e].[passingYear], [e].[resumeId], [e].[specialization], [e].[university]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__p_0
+ 2022-04-07 12:05:11,611  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: using lazy loading proxies 
+ 2022-04-07 12:05:11,616  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-07 12:05:11,637 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (4ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+DELETE FROM [Resume]
+WHERE [resumeId] = @p0;
+SELECT @@ROWCOUNT;
+ 2022-04-07 12:05:11,647 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
  ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
 The statement has been terminated.
    at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
@@ -16,7 +407,67 @@ The statement has been terminated.
    at System.Data.Common.DbCommand.ExecuteReader()
    at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-ClientConnectionId:e16eece1-c405-429c-b172-4cfcbe071ed1
+ClientConnectionId:ae13c408-e515-4de2-9b25-c03ada84a58c
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:ae13c408-e515-4de2-9b25-c03ada84a58c
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2022-04-07 12:05:19,893 ERROR RmsWebApi.GlobalErrorMiddleware.HandleException [29] - MESSAGE: Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:ae13c408-e515-4de2-9b25-c03ada84a58c
 Error Number:547,State:0,Class:16
    --- End of inner exception stack trace ---
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
@@ -29,8 +480,8 @@ Error Number:547,State:0,Class:16
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
    at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
    at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
-   at RmsWebApi.Repository.BaseRepository`1.Delete(T entity) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\BaseRepository.cs:line 33
-   at RmsWebApi.Repository.ResumeRepository.Delete(Int32 ResumeId) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\ResumeRepository.cs:line 180
+   at RmsWebApi.Repository.BaseRepository`1.Delete(T entity) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\BaseRepository.cs:line 34
+   at RmsWebApi.Repository.ResumeRepository.Delete(Int32 ResumeId) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\ResumeRepository.cs:line 173
    at RmsWebApi.Controllers.API.Controller.ResumeController.Delete(Int32 id) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\Controllers\ResumeController.cs:line 36
    at Microsoft.Extensions.Internal.ObjectMethodExecutor.<>c__DisplayClass33_0.<WrapVoidMethod>b__0(Object target, Object[] parameters)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.VoidResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
@@ -47,23 +498,260 @@ Error Number:547,State:0,Class:16
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
    at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
    at RmsWebApi.GlobalErrorMiddleware.Invoke(HttpContext context, ILogger`1 logger) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\GlobalErrorMiddleware.cs:line 18
- 2022-04-05 18:39:30,943  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
- 2022-04-05 18:39:31,023  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
- 2022-04-05 18:39:31,028  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
- 2022-04-05 18:39:31,033  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
- 2022-04-05 18:39:31,034  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
- 2022-04-05 18:39:45,048  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
- 2022-04-05 18:39:45,926  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (45ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+ 2022-04-07 12:07:55,183  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
+ 2022-04-07 12:07:55,236  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
+ 2022-04-07 12:07:55,241  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-04-07 12:07:55,244  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-04-07 12:07:55,246  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
+ 2022-04-07 12:10:04,436  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: using lazy loading proxies 
+ 2022-04-07 12:10:05,420  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (49ms) [Parameters=[@p0='?' (DbType = DateTime), @p1='?' (Size = 10) (DbType = AnsiString), @p2='?' (Size = 50) (DbType = AnsiString), @p3='?' (DbType = DateTime)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Resume] ([creationDate], [resumeStatus], [resumeTitle], [updationDate])
+VALUES (@p0, @p1, @p2, @p3);
+SELECT [resumeId]
+FROM [Resume]
+WHERE @@ROWCOUNT = 1 AND [resumeId] = scope_identity();
+ 2022-04-07 12:10:05,505  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (16ms) [Parameters=[@p4='?' (Size = 100) (DbType = AnsiString), @p5='?' (Size = 250) (DbType = AnsiString), @p6='?' (DbType = Double), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32), @p9='?' (Size = 500) (DbType = AnsiString), @p10='?' (Size = 100) (DbType = AnsiString), @p11='?' (Size = 200) (DbType = AnsiString), @p12='?' (Size = 50) (DbType = AnsiString), @p13='?' (DbType = Int32), @p14='?' (Size = 100) (DbType = AnsiString), @p15='?' (DbType = Int32), @p16='?' (DbType = Double), @p17='?' (Size = 200) (DbType = AnsiString), @p18='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [EducationDetails] ([courseName], [instituteName], [marks], [passingYear], [resumeId], [specialization], [university])
+VALUES (@p4, @p5, @p6, @p7, @p8, @p9, @p10);
+SELECT [educationId]
+FROM [EducationDetails]
+WHERE @@ROWCOUNT = 1 AND [educationId] = scope_identity();
+
+INSERT INTO [Membership] ([membershipDesc], [membershipName], [resumeId])
+VALUES (@p11, @p12, @p13);
+SELECT [membershipId]
+FROM [Membership]
+WHERE @@ROWCOUNT = 1 AND [membershipId] = scope_identity();
+
+INSERT INTO [MyDetails] ([profilePicture], [resumeId], [totalExp])
+VALUES (@p14, @p15, @p16);
+SELECT [userdetailsId]
+FROM [MyDetails]
+WHERE @@ROWCOUNT = 1 AND [userdetailsId] = scope_identity();
+
+INSERT INTO [Skills] ([category], [resumeID])
+VALUES (@p17, @p18);
+SELECT [skillId]
+FROM [Skills]
+WHERE @@ROWCOUNT = 1 AND [skillId] = scope_identity();
+ 2022-04-07 12:10:35,541  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: using lazy loading proxies 
+ 2022-04-07 12:10:35,891  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
 FROM [Resume] AS [r]
- 2022-04-05 18:39:46,262 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (39ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+ 2022-04-07 12:10:36,062  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[skillId], [s].[category], [s].[resumeID]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__p_0
+ 2022-04-07 12:10:36,086  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[aboutMeId], [a].[keyPoints], [a].[mainDescription], [a].[resumeId]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:10:36,126  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementId], [a].[achievementDesc], [a].[achievementName], [a].[achievementYear], [a].[resumeId]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:10:36,151  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipId], [m].[membershipDesc], [m].[membershipName], [m].[resumeId]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:10:36,165  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[userdetailsId], [m].[profilePicture], [m].[resumeId], [m].[totalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:10:36,179  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[workExperienceId], [w].[businessSolution], [w].[clientDescription], [w].[country], [w].[endDate], [w].[projectName], [w].[projectResponsibilities], [w].[projectRole], [w].[resumeId], [w].[startDate], [w].[technologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__p_0
+ 2022-04-07 12:10:36,213  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId], [e].[courseName], [e].[instituteName], [e].[marks], [e].[passingYear], [e].[resumeId], [e].[specialization], [e].[university]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__p_0
+ 2022-04-07 12:10:36,223  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[skillId], [s].[category], [s].[resumeID]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__p_0
+ 2022-04-07 12:10:36,229  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[aboutMeId], [a].[keyPoints], [a].[mainDescription], [a].[resumeId]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:10:36,234  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementId], [a].[achievementDesc], [a].[achievementName], [a].[achievementYear], [a].[resumeId]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:10:36,239  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipId], [m].[membershipDesc], [m].[membershipName], [m].[resumeId]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:10:36,243  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[userdetailsId], [m].[profilePicture], [m].[resumeId], [m].[totalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:10:36,248  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[workExperienceId], [w].[businessSolution], [w].[clientDescription], [w].[country], [w].[endDate], [w].[projectName], [w].[projectResponsibilities], [w].[projectRole], [w].[resumeId], [w].[startDate], [w].[technologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__p_0
+ 2022-04-07 12:10:36,254  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId], [e].[courseName], [e].[instituteName], [e].[marks], [e].[passingYear], [e].[resumeId], [e].[specialization], [e].[university]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__p_0
+ 2022-04-07 12:18:49,060  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: using lazy loading proxies 
+ 2022-04-07 12:18:49,085  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-07 12:18:49,093  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[skillId], [s].[category], [s].[resumeID]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__p_0
+ 2022-04-07 12:18:49,108  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[aboutMeId], [a].[keyPoints], [a].[mainDescription], [a].[resumeId]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:18:49,116  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[userdetailsId], [m].[profilePicture], [m].[resumeId], [m].[totalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:18:49,122  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementId], [a].[achievementDesc], [a].[achievementName], [a].[achievementYear], [a].[resumeId]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:18:49,128  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipId], [m].[membershipDesc], [m].[membershipName], [m].[resumeId]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:18:49,135  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[workExperienceId], [w].[businessSolution], [w].[clientDescription], [w].[country], [w].[endDate], [w].[projectName], [w].[projectResponsibilities], [w].[projectRole], [w].[resumeId], [w].[startDate], [w].[technologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__p_0
+ 2022-04-07 12:18:49,144  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId], [e].[courseName], [e].[instituteName], [e].[marks], [e].[passingYear], [e].[resumeId], [e].[specialization], [e].[university]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__p_0
+ 2022-04-07 12:18:49,173  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (Size = 500) (DbType = AnsiString), @p2='?' (DbType = Int32), @p3='?' (Size = 200) (DbType = AnsiString), @p4='?' (Size = 50) (DbType = AnsiString), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 100) (DbType = AnsiString), @p8='?' (Size = 250) (DbType = AnsiString), @p9='?' (DbType = Double), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (Size = 500) (DbType = AnsiString), @p13='?' (Size = 100) (DbType = AnsiString), @p14='?' (Size = 200) (DbType = AnsiString), @p15='?' (Size = 50) (DbType = AnsiString), @p16='?' (DbType = Int32), @p17='?' (Size = 100) (DbType = AnsiString), @p18='?' (DbType = Int32), @p19='?' (DbType = Double), @p24='?' (DbType = Int32), @p20='?' (DbType = DateTime), @p21='?' (Size = 10) (DbType = AnsiString), @p22='?' (Size = 50) (DbType = AnsiString), @p23='?' (DbType = DateTime), @p25='?' (Size = 200) (DbType = AnsiString), @p26='?' (DbType = Int32), @p27='?' (Size = 8000) (DbType = AnsiString), @p28='?' (Size = 100) (DbType = AnsiString), @p29='?' (Size = 3) (DbType = AnsiString), @p30='?' (DbType = Date), @p31='?' (Size = 50) (DbType = AnsiString), @p32='?' (Size = 50) (DbType = AnsiString), @p33='?' (Size = 50) (DbType = AnsiString), @p34='?' (DbType = Int32), @p35='?' (DbType = Date), @p36='?' (Size = 8000) (DbType = AnsiString)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AboutMe] ([keyPoints], [mainDescription], [resumeId])
+VALUES (@p0, @p1, @p2);
+SELECT [aboutMeId]
+FROM [AboutMe]
+WHERE @@ROWCOUNT = 1 AND [aboutMeId] = scope_identity();
+
+INSERT INTO [Achievements] ([achievementDesc], [achievementName], [achievementYear], [resumeId])
+VALUES (@p3, @p4, @p5, @p6);
+SELECT [achievementId]
+FROM [Achievements]
+WHERE @@ROWCOUNT = 1 AND [achievementId] = scope_identity();
+
+INSERT INTO [EducationDetails] ([courseName], [instituteName], [marks], [passingYear], [resumeId], [specialization], [university])
+VALUES (@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+SELECT [educationId]
+FROM [EducationDetails]
+WHERE @@ROWCOUNT = 1 AND [educationId] = scope_identity();
+
+INSERT INTO [Membership] ([membershipDesc], [membershipName], [resumeId])
+VALUES (@p14, @p15, @p16);
+SELECT [membershipId]
+FROM [Membership]
+WHERE @@ROWCOUNT = 1 AND [membershipId] = scope_identity();
+
+INSERT INTO [MyDetails] ([profilePicture], [resumeId], [totalExp])
+VALUES (@p17, @p18, @p19);
+SELECT [userdetailsId]
+FROM [MyDetails]
+WHERE @@ROWCOUNT = 1 AND [userdetailsId] = scope_identity();
+
+UPDATE [Resume] SET [creationDate] = @p20, [resumeStatus] = @p21, [resumeTitle] = @p22, [updationDate] = @p23
+WHERE [resumeId] = @p24;
+SELECT @@ROWCOUNT;
+
+INSERT INTO [Skills] ([category], [resumeID])
+VALUES (@p25, @p26);
+SELECT [skillId]
+FROM [Skills]
+WHERE @@ROWCOUNT = 1 AND [skillId] = scope_identity();
+
+INSERT INTO [WorkExperience] ([businessSolution], [clientDescription], [country], [endDate], [projectName], [projectResponsibilities], [projectRole], [resumeId], [startDate], [technologyStack])
+VALUES (@p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36);
+SELECT [workExperienceId]
+FROM [WorkExperience]
+WHERE @@ROWCOUNT = 1 AND [workExperienceId] = scope_identity();
+ 2022-04-07 12:18:56,803  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: using lazy loading proxies 
+ 2022-04-07 12:18:56,806  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-07 12:18:56,810  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[skillId], [s].[category], [s].[resumeID]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__p_0
+ 2022-04-07 12:18:56,817  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[aboutMeId], [a].[keyPoints], [a].[mainDescription], [a].[resumeId]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:18:56,821  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementId], [a].[achievementDesc], [a].[achievementName], [a].[achievementYear], [a].[resumeId]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:18:56,824  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipId], [m].[membershipDesc], [m].[membershipName], [m].[resumeId]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:18:56,827  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[userdetailsId], [m].[profilePicture], [m].[resumeId], [m].[totalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:18:56,834  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[workExperienceId], [w].[businessSolution], [w].[clientDescription], [w].[country], [w].[endDate], [w].[projectName], [w].[projectResponsibilities], [w].[projectRole], [w].[resumeId], [w].[startDate], [w].[technologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__p_0
+ 2022-04-07 12:18:56,838  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId], [e].[courseName], [e].[instituteName], [e].[marks], [e].[passingYear], [e].[resumeId], [e].[specialization], [e].[university]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__p_0
+ 2022-04-07 12:18:56,842  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[skillId], [s].[category], [s].[resumeID]
+FROM [Skills] AS [s]
+WHERE [s].[resumeID] = @__p_0
+ 2022-04-07 12:18:56,849  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[aboutMeId], [a].[keyPoints], [a].[mainDescription], [a].[resumeId]
+FROM [AboutMe] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:18:56,852  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [a].[achievementId], [a].[achievementDesc], [a].[achievementName], [a].[achievementYear], [a].[resumeId]
+FROM [Achievements] AS [a]
+WHERE [a].[resumeId] = @__p_0
+ 2022-04-07 12:18:56,856  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[membershipId], [m].[membershipDesc], [m].[membershipName], [m].[resumeId]
+FROM [Membership] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:18:56,859  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[userdetailsId], [m].[profilePicture], [m].[resumeId], [m].[totalExp]
+FROM [MyDetails] AS [m]
+WHERE [m].[resumeId] = @__p_0
+ 2022-04-07 12:18:56,865  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [w].[workExperienceId], [w].[businessSolution], [w].[clientDescription], [w].[country], [w].[endDate], [w].[projectName], [w].[projectResponsibilities], [w].[projectRole], [w].[resumeId], [w].[startDate], [w].[technologyStack]
+FROM [WorkExperience] AS [w]
+WHERE [w].[resumeId] = @__p_0
+ 2022-04-07 12:18:56,869  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [e].[educationId], [e].[courseName], [e].[instituteName], [e].[marks], [e].[passingYear], [e].[resumeId], [e].[specialization], [e].[university]
+FROM [EducationDetails] AS [e]
+WHERE [e].[resumeId] = @__p_0
+ 2022-04-07 12:21:28,072  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
+ 2022-04-07 12:21:28,136  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
+ 2022-04-07 12:21:28,142  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-04-07 12:21:28,147  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-04-07 12:21:28,149  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
+ 2022-04-07 12:21:37,811  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: using lazy loading proxies 
+ 2022-04-07 12:21:38,480  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (27ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
+FROM [Resume] AS [r]
+ 2022-04-07 12:21:38,817 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (30ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
 SET NOCOUNT ON;
 DELETE FROM [Resume]
 WHERE [resumeId] = @p0;
 SELECT @@ROWCOUNT;
- 2022-04-05 18:39:46,299 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
+ 2022-04-07 12:21:38,852 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
 Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
- ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_EducationDetails_Resume". The conflict occurred in database "RMS", table "dbo.EducationDetails", column 'resumeId'.
 The statement has been terminated.
    at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
    at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
@@ -80,7 +768,7 @@ The statement has been terminated.
    at System.Data.Common.DbCommand.ExecuteReader()
    at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-ClientConnectionId:0e947deb-51e1-411c-9483-be99049ff317
+ClientConnectionId:e79a89f9-31eb-4346-98e9-e983f354d641
 Error Number:547,State:0,Class:16
    --- End of inner exception stack trace ---
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
@@ -93,7 +781,7 @@ Error Number:547,State:0,Class:16
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
    at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
  Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
- ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_EducationDetails_Resume". The conflict occurred in database "RMS", table "dbo.EducationDetails", column 'resumeId'.
 The statement has been terminated.
    at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
    at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
@@ -110,7 +798,7 @@ The statement has been terminated.
    at System.Data.Common.DbCommand.ExecuteReader()
    at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-ClientConnectionId:0e947deb-51e1-411c-9483-be99049ff317
+ClientConnectionId:e79a89f9-31eb-4346-98e9-e983f354d641
 Error Number:547,State:0,Class:16
    --- End of inner exception stack trace ---
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
@@ -122,585 +810,8 @@ Error Number:547,State:0,Class:16
    at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
    at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
-2022-04-05 19:00:24,719  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
- 2022-04-05 19:00:24,771  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
- 2022-04-05 19:00:24,775  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
- 2022-04-05 19:00:24,777  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
- 2022-04-05 19:00:24,779  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
- 2022-04-05 19:00:33,554  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
- 2022-04-05 19:00:34,383  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (49ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
-FROM [Resume] AS [r]
- 2022-04-05 19:00:34,773  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (57ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:00:34,795  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,818  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,837  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,860  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,876  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,889  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (4ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,901  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:00:34,910  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,917  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,925  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,931  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,937  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,946  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,954  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:00:34,961  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,967  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,974  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,980  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,987  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,992  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:34,998  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:00:35,004  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,010  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,016  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,024  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,034  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (4ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,044  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,051  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:00:35,061  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,071  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,076  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,082  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,089  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,097  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,103  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:00:35,115  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,122  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,127  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,132  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,139  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,145  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,150  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:00:35,159  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (6ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,165  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,173  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,178  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,191  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (9ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,198  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,206  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:00:35,211  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,218  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,225  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,232  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,238  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,243  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,247  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:00:35,254  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,259  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,264  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,268  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,274  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:35,278  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:00:57,854  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
- 2022-04-05 19:00:57,904  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
-FROM [Resume] AS [r]
- 2022-04-05 19:00:58,133  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SET NOCOUNT ON;
-DELETE FROM [Resume]
-WHERE [resumeId] = @p0;
-SELECT @@ROWCOUNT;
- 2022-04-05 19:01:07,765  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
- 2022-04-05 19:01:07,772  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
-FROM [Resume] AS [r]
- 2022-04-05 19:01:07,781  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:01:07,787  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,795  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,800  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,807  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,813  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,819  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,825  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:01:07,832  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,835  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,844  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,849  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,858  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,862  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,867  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:01:07,874  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,880  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,886  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,893  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,899  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,906  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,913  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:01:07,919  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,926  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,932  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,939  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,944  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,950  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,957  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:01:07,963  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,970  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,978  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,984  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,990  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:07,998  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,004  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:01:08,012  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,019  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,026  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,034  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,040  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,046  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,052  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:01:08,059  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (0ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,067  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,076  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,083  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,091  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (4ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,097  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,104  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [s].[category] AS [Category]
-FROM [Skills] AS [s]
-WHERE [s].[resumeID] = @__x_ResumeId_0
- 2022-04-05 19:01:08,111  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[keyPoints] AS [KeyPoints], [a].[mainDescription] AS [MainDescription]
-FROM [AboutMe] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,116  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [a].[achievementName] AS [AchievementName], [a].[achievementYear] AS [AchievementYear], [a].[achievementDesc] AS [AchievementDescription]
-FROM [Achievements] AS [a]
-WHERE [a].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,122  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[membershipName] AS [MembershipName], [m].[membershipDesc] AS [MembershipDescription]
-FROM [Membership] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,127  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [m].[profilePicture] AS [ProfilePicture], CAST([m].[totalExp] AS real) AS [TotalExp]
-FROM [MyDetails] AS [m]
-WHERE [m].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,132  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (2ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [w].[clientDescription] AS [ClientDescription], [w].[country] AS [Country], [w].[projectName] AS [ProjectName], [w].[projectRole] AS [ProjectRole], [w].[projectResponsibilities] AS [ProjectResponsibilities], [w].[startDate] AS [StartDate], [w].[endDate] AS [EndDate], [w].[businessSolution] AS [BusinessSolution], [w].[technologyStack] AS [TechnologyStack]
-FROM [WorkExperience] AS [w]
-WHERE [w].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:01:08,141  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (3ms) [Parameters=[@__x_ResumeId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT [e].[educationId] AS [EducationalDetailsId], [e].[courseName] AS [CourseName], [e].[specialization] AS [Stream], [e].[instituteName] AS [InstitutionName], [e].[passingYear] AS [PassingYear], CAST([e].[marks] AS real) AS [Marks], [e].[university] AS [University]
-FROM [EducationDetails] AS [e]
-WHERE [e].[resumeId] = @__x_ResumeId_0
- 2022-04-05 19:02:48,892  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
- 2022-04-05 19:02:48,898  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
-FROM [Resume] AS [r]
- 2022-04-05 19:02:48,945 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (10ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SET NOCOUNT ON;
-DELETE FROM [Resume]
-WHERE [resumeId] = @p0;
-SELECT @@ROWCOUNT;
- 2022-04-05 19:02:48,972 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
-Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
- ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
-The statement has been terminated.
-   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
-   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
-   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-ClientConnectionId:81a16290-5193-420b-962b-2e2ffcc2054b
-Error Number:547,State:0,Class:16
-   --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
-   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
- Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
- ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
-The statement has been terminated.
-   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
-   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
-   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-ClientConnectionId:81a16290-5193-420b-962b-2e2ffcc2054b
-Error Number:547,State:0,Class:16
-   --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
-   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
-2022-04-05 19:03:32,601  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
- 2022-04-05 19:03:32,652  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
- 2022-04-05 19:03:32,655  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
- 2022-04-05 19:03:32,658  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
- 2022-04-05 19:03:32,659  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
- 2022-04-05 19:03:48,959  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
- 2022-04-05 19:03:49,857  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (26ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
-FROM [Resume] AS [r]
- 2022-04-05 19:03:50,173 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (41ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SET NOCOUNT ON;
-DELETE FROM [Resume]
-WHERE [resumeId] = @p0;
-SELECT @@ROWCOUNT;
- 2022-04-05 19:03:50,216 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
-Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
- ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
+2022-04-07 12:21:51,727 ERROR RmsWebApi.GlobalErrorMiddleware.HandleException [29] - MESSAGE: Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_EducationDetails_Resume". The conflict occurred in database "RMS", table "dbo.EducationDetails", column 'resumeId'.
 The statement has been terminated.
    at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
    at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
@@ -717,7 +828,7 @@ The statement has been terminated.
    at System.Data.Common.DbCommand.ExecuteReader()
    at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-ClientConnectionId:34eeece5-7763-47b2-877a-8ec5ddfb8f97
+ClientConnectionId:e79a89f9-31eb-4346-98e9-e983f354d641
 Error Number:547,State:0,Class:16
    --- End of inner exception stack trace ---
    at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
@@ -729,174 +840,53 @@ Error Number:547,State:0,Class:16
    at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
    at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
    at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
- Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
- ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
-The statement has been terminated.
-   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
-   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
-   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.ExecuteReader()
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-ClientConnectionId:34eeece5-7763-47b2-877a-8ec5ddfb8f97
-Error Number:547,State:0,Class:16
-   --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
-   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
-2022-04-05 19:07:19,543  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
- 2022-04-05 19:07:19,620  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
- 2022-04-05 19:07:19,626  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
- 2022-04-05 19:07:19,629  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
- 2022-04-05 19:07:19,631  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
- 2022-04-05 19:07:44,838  INFO Microsoft.EntityFrameworkCore.Infrastructure.? [?] - MESSAGE: Entity Framework Core 6.0.3 initialized 'RMSContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.3' with options: None
- 2022-04-05 19:07:45,539  INFO Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Executed DbCommand (23ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT [r].[resumeId], [r].[creationDate], [r].[resumeStatus], [r].[resumeTitle], [r].[updationDate]
-FROM [Resume] AS [r]
- 2022-04-05 19:07:45,929 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (38ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SET NOCOUNT ON;
-DELETE FROM [Resume]
-WHERE [resumeId] = @p0;
-SELECT @@ROWCOUNT;
- 2022-04-05 19:07:45,961 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
-Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
- ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
-The statement has been terminated.
-   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
-   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
-   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.ExecuteReader()
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-ClientConnectionId:9cb53ddc-db8b-47ea-9a70-faf4f7207593
-Error Number:547,State:0,Class:16
-   --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
-   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
- Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
- ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
-The statement has been terminated.
-   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
-   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
-   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.ExecuteReader()
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-ClientConnectionId:9cb53ddc-db8b-47ea-9a70-faf4f7207593
-Error Number:547,State:0,Class:16
-   --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
-   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
-2022-04-05 19:08:23,636 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SET NOCOUNT ON;
-DELETE FROM [Resume]
-WHERE [resumeId] = @p0;
-SELECT @@ROWCOUNT;
- 2022-04-05 19:08:23,647 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'RmsWebApi.RMS_DB.RMSContext'.
-Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
- ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
-The statement has been terminated.
-   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
-   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
-   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.ExecuteReader()
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-ClientConnectionId:9cb53ddc-db8b-47ea-9a70-faf4f7207593
-Error Number:547,State:0,Class:16
-   --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
-   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
- Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
- ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The DELETE statement conflicted with the REFERENCE constraint "FK_AboutMe_Resume". The conflict occurred in database "RMS", table "dbo.AboutMe", column 'resumeId'.
-The statement has been terminated.
-   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
-   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
-   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.ExecuteReader()
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-ClientConnectionId:9cb53ddc-db8b-47ea-9a70-faf4f7207593
-Error Number:547,State:0,Class:16
-   --- End of inner exception stack trace ---
-   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__104_0(DbContext _, ValueTuple`2 t)
-   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
-   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
-   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at RmsWebApi.Repository.BaseRepository`1.Delete(T entity) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\BaseRepository.cs:line 34
+   at RmsWebApi.Repository.ResumeRepository.Delete(Int32 ResumeId) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\Repository\ResumeRepository.cs:line 173
+   at RmsWebApi.Controllers.API.Controller.ResumeController.Delete(Int32 id) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\Controllers\ResumeController.cs:line 36
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.<>c__DisplayClass33_0.<WrapVoidMethod>b__0(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.VoidResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at RmsWebApi.GlobalErrorMiddleware.Invoke(HttpContext context, ILogger`1 logger) in D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\GlobalErrorMiddleware.cs:line 18
+ 2022-04-07 12:36:57,375  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
+ 2022-04-07 12:36:57,424  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
+ 2022-04-07 12:36:57,429  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-04-07 12:36:57,433  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-04-07 12:36:57,434  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
+ 2022-04-07 12:37:58,426  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
+ 2022-04-07 12:37:58,505  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
+ 2022-04-07 12:37:58,511  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-04-07 12:37:58,516  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-04-07 12:37:58,518  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
+ 2022-04-07 12:58:22,564  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
+ 2022-04-07 12:58:22,682  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
+ 2022-04-07 12:58:22,686  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-04-07 12:58:22,689  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-04-07 12:58:22,691  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
+ 2022-04-07 13:01:52,218  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
+ 2022-04-07 13:01:52,304  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
+ 2022-04-07 13:01:52,309  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-04-07 13:01:52,313  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-04-07 13:01:52,316  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
+ 2022-04-07 13:05:15,692  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
+ 2022-04-07 13:05:15,777  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
+ 2022-04-07 13:05:15,787  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-04-07 13:05:15,794  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-04-07 13:05:15,798  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
+ 2022-04-07 13:06:46,498  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7258
+ 2022-04-07 13:06:46,576  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5258
+ 2022-04-07 13:06:46,582  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-04-07 13:06:46,588  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-04-07 13:06:46,592  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\
+ 

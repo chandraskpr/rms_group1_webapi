@@ -271,3 +271,5 @@ D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\runtim
 D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\log4net.config
 D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\log4net.dll
 D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
+D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Castle.Core.dll
+D:\Project_RMS\API\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Proxies.dll

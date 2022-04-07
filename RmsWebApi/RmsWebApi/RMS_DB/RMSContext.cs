@@ -367,7 +367,8 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.WorkExperiences)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_WorkExperience_Resume");
+                    .HasConstraintName("FK_WorkExperience_Resume")
+                    .OnDelete(DeleteBehavior.Cascade);
             });
             
             OnModelCreatingPartial(modelBuilder);

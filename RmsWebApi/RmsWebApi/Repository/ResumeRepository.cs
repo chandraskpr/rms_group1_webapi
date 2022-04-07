@@ -23,38 +23,38 @@ namespace RmsWebApi.Repository
                 UpdationDate = x.UpdationDate,
                 CreationDate = x.CreationDate,
 
-                SkillList = context.Skills.Where(w => w.ResumeId == x.ResumeId).Select(s => new RMS.Domain.ResumeDomain.SkillsDomain()
+                SkillList = x.Skills.Select(s => new RMS.Domain.ResumeDomain.SkillsDomain()
                 {
                     Category = s.Category,
 
                 }).ToList(),
 
-                aboutMe = context.AboutMes.Where(w => w.ResumeId == x.ResumeId).Select(b => new RMS.Domain.ResumeDomain.AboutMeDomain()
+                aboutMe = x.AboutMes.Select(b => new RMS.Domain.ResumeDomain.AboutMeDomain()
                 {
                     KeyPoints = b.KeyPoints,
                     MainDescription = b.MainDescription,
                 }).ToList(),
 
-                achivements = context.Achievements.Where(w => w.ResumeId == x.ResumeId).Select(c => new RMS.Domain.ResumeDomain.AchievementsDomain()
+                achivements = x.Achievements.Select(c => new RMS.Domain.ResumeDomain.AchievementsDomain()
                 {
                     AchievementName = c.AchievementName,
                     AchievementYear = c.AchievementYear,
                     AchievementDescription = c.AchievementDesc,
                 }).ToList(),
 
-                memberships = context.Memberships.Where(w => w.ResumeId == x.ResumeId).Select(e => new RMS.Domain.ResumeDomain.MembershipsDomain()
+                memberships = x.Memberships.Select(e => new RMS.Domain.ResumeDomain.MembershipsDomain()
                 {
                     MembershipName = e.MembershipName,
                     MembershipDescription = e.MembershipDesc,
                 }).ToList(),
 
-                myDetails = context.MyDetails.Where(w => w.ResumeId == x.ResumeId).Select(f => new RMS.Domain.ResumeDomain.MyDetailsDomain()
+                myDetails = x.MyDetails.Select(f => new RMS.Domain.ResumeDomain.MyDetailsDomain()
                 {
                    ProfilePicture = f.ProfilePicture,
                    TotalExp = (float)f.TotalExp,
                 }).ToList(),
 
-                workExperience = context.WorkExperiences.Where(w => w.ResumeId == x.ResumeId).Select(g => new RMS.Domain.ResumeDomain.WorkExperienceDomain()
+                workExperience = x.WorkExperiences.Select(g => new RMS.Domain.ResumeDomain.WorkExperienceDomain()
                 {
                     ClientDescription = g.ClientDescription,
                     Country = g.Country,
@@ -67,7 +67,7 @@ namespace RmsWebApi.Repository
                     TechnologyStack = g.TechnologyStack,
                 }).ToList(),
 
-                educationDetails = context.EducationDetails.Where(w => w.ResumeId == x.ResumeId).Select(d => new RMS.Domain.ResumeDomain.EducationDetailsDomain()
+                educationDetails = x.EducationDetails.Select(d => new RMS.Domain.ResumeDomain.EducationDetailsDomain()
                 {
                     EducationalDetailsId = d.EducationId,
                     CourseName = d.CourseName,
@@ -169,16 +169,8 @@ namespace RmsWebApi.Repository
         {
             var res = base.SelectAll().FirstOrDefault(x => x.ResumeId == ResumeId);
             
-            context.AboutMes.RemoveRange(res.AboutMes);
-            
-            context.Memberships.RemoveRange(res.Memberships);
-            context.MyDetails.RemoveRange(res.MyDetails);
-            context.Achievements.RemoveRange(res.Achievements);
-            context.EducationDetails.RemoveRange(res.EducationDetails);
-            context.Skills.RemoveRange(res.Skills);
-            context.WorkExperiences.RemoveRange(res.WorkExperiences);
-
-            base.Delete(res);
+            if(res!= null)
+                base.Delete(res);
 
         }
 

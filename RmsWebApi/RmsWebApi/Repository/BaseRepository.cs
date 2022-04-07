@@ -17,6 +17,7 @@ namespace RmsWebApi.Repository
         {
 
             this.context = context;
+            
             entitySet = this.context.Set<T>();
         }
 
