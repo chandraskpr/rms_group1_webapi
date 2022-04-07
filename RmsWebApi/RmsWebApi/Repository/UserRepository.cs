@@ -67,6 +67,11 @@ namespace RmsWebApi.Repository
             var res = this.entitySet
                 .Include(x => x.UserResumes)
                 .FirstOrDefault(x => x.UserId == UserId);
+
+            if (res != null)
+            {
+                base.Delete(res);
+            }
         }
 
         public void Update(int UserId, UserInfoDomain userInfo)
