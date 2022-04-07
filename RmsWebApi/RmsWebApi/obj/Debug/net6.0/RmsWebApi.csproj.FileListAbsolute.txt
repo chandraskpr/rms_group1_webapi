@@ -59,6 +59,7 @@ E:\Project\RMS\RmsWebApi (1)\RmsWebApi\RmsWebApi\obj\Debug\net6.0\refint\RmsWebA
 E:\Project\RMS\RmsWebApi (1)\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.pdb
 E:\Project\RMS\RmsWebApi (1)\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.genruntimeconfig.cache
 E:\Project\RMS\RmsWebApi (1)\RmsWebApi\RmsWebApi\obj\Debug\net6.0\ref\RmsWebApi.dll
+E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\log4net.config
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\appsettings.Development.json
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\appsettings.json
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\RmsWebApi.exe
@@ -66,14 +67,18 @@ E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\RmsWebApi.
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\RmsWebApi.runtimeconfig.json
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\RmsWebApi.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\RmsWebApi.pdb
+E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Castle.Core.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Humanizer.dll
+E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\log4net.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Proxies.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Identity.Client.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
@@ -82,6 +87,7 @@ E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.OpenApi.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Newtonsoft.Json.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -120,7 +126,3 @@ E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\refint\Rms
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.pdb
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.genruntimeconfig.cache
 E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\ref\RmsWebApi.dll
-E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\log4net.config
-E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\log4net.dll
-E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
-E:\Project\RMS\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Newtonsoft.Json.dll
