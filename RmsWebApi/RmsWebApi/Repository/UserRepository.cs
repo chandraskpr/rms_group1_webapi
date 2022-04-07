@@ -3,6 +3,7 @@ using RmsWebApi.Data;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
 using RMS.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace RmsWebApi.Repository
 {
@@ -25,6 +26,14 @@ namespace RmsWebApi.Repository
                 UserEmail = x.UserEmail,
                 UserRole = x.UserRole,
 
+                userResumeDomains = x.UserResumes.Select(a => new UserResumeDomain()
+                {
+                    UserId = a.UserResumeId,
+                    UserResumeId = a.UserResumeId,
+                    ResumeId = a.ResumeId,
+                }
+                ).ToList(),
+
             }).ToList();
             return records;
         }
@@ -39,7 +48,16 @@ namespace RmsWebApi.Repository
                 UserRole = userInfo.UserRole,
 
             };
-
+            foreach (var records in userInfo.userResumeDomains)
+            {
+                user.UserResumes.Add(new UserResume()
+                {
+                    UserResumeId = records.UserResumeId,
+                    UserId = records.UserId,
+                    ResumeId = records.ResumeId,
+                }
+                );
+            }
             base.Create(user);
 
         }
@@ -62,6 +80,16 @@ namespace RmsWebApi.Repository
                 user.UserEmail = userInfo.UserEmail;
                 user.UserRole = userInfo.UserRole;
 
+                foreach (var records in userInfo.userResumeDomains)
+                {
+                    user.UserResumes.Add(new UserResume()
+                    {
+                        UserResumeId = records.UserResumeId,
+                        UserId = records.UserId,
+                        ResumeId = records.ResumeId,
+                    }
+                    );
+                }
                 base.Update(user);
 
             }
