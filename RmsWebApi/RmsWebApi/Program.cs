@@ -3,6 +3,7 @@ using RmsWebApi.Repository;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
 using static RmsWebApi.GlobalErrorMiddleware;
+using Microsoft.EntityFrameworkCore.Proxies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,10 @@ builder.Logging.AddLog4Net(new Log4NetProviderOptions("log4net.config"));
 
 
 var connectionString = builder.Configuration.GetConnectionString("RMSDbConnection");
-builder.Services.AddDbContext<RMSContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDbContext<RMSContext>(options => 
+
+options.UseLazyLoadingProxies().UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
