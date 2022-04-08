@@ -8,6 +8,7 @@ namespace RmsWebApi.Data
         public UserInfoDomain()
         {
             userResumeDomains = new List<UserResumeDomains>();
+            NotificationList = new List<UserNotificationsDomain>();
         }
         public int UserId { get; set; }
         
@@ -17,5 +18,6 @@ namespace RmsWebApi.Data
         
         public string UserEmail { get; set; }
         public List<UserResumeDomains> userResumeDomains { get; set; }
+        public List<UserNotificationsDomain> NotificationList { get; set; }
     }
 }

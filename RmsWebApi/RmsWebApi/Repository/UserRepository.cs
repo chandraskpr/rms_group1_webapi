@@ -32,6 +32,16 @@ namespace RmsWebApi.Repository
                 }
                 ).ToList(),
 
+                NotificationList = x.UserNotifications.Select(x => new UserNotificationsDomain()
+                {
+                    NotificationId = x.NotificationId,
+                    UserId = x.UserId,
+                    NotificationDescription = x.NotificationDescription,
+                    NotificationState = x.NotificationState,
+                    CreationDate = x.CreationDate,
+
+                }).ToList(),
+
             }).ToList();
             return records;
         }
@@ -57,6 +67,18 @@ namespace RmsWebApi.Repository
                 );
             }
 
+            foreach (var res in userInfo.NotificationList)
+            {
+                user.UserNotifications.Add(new UserNotification()
+                {
+                    UserId = res.UserId,
+                    NotificationId = res.NotificationId,
+                    NotificationDescription = res.NotificationDescription,
+                    NotificationState = res.NotificationState,
+                    CreationDate = res.CreationDate,
+                });
+            }
+
             base.Create(user);
 
         }
@@ -66,6 +88,7 @@ namespace RmsWebApi.Repository
         {
             var res = this.entitySet
                 .Include(x => x.UserResumes)
+                .Include(x => x.UserNotifications)
                 .FirstOrDefault(x => x.UserId == UserId);
 
             if (res != null)
@@ -95,6 +118,18 @@ namespace RmsWebApi.Repository
                     );
                 }
 
+                foreach (var res in userInfo.NotificationList)
+                {
+                    user.UserNotifications.Add(new UserNotification()
+                    {
+                        UserId = res.UserId,
+                        NotificationId = res.NotificationId,
+                        NotificationDescription = res.NotificationDescription,
+                        NotificationState = res.NotificationState,
+                        CreationDate = res.CreationDate,
+                    });
+                }
+
                 base.Update(user);
 
             }
@@ -110,6 +145,8 @@ namespace RmsWebApi.Repository
                 NotificationDescription = x.NotificationDescription,
                 CreationDate = x.CreationDate,
                 NotificationState = x.NotificationState,
+
+                
 
             }).ToList();
             return records;
