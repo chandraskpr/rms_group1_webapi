@@ -12,10 +12,10 @@ namespace RmsWebApi.Controllers
     {
         private readonly IUserRepository userRepository;
 
-       
-        public  UserController(IUserRepository userRepository)
+
+        public UserController(IUserRepository userRepository)
         {
-                this.userRepository = userRepository;
+            this.userRepository = userRepository;
         }
 
         // GET: api/<UserController>

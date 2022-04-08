@@ -7,11 +7,11 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace RmsWebApi.Repository
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T:class
+    public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
 
         protected readonly RMSContext context;
-        private readonly DbSet<T> entitySet;
+        protected readonly DbSet<T> entitySet;
 
         public BaseRepository(RMSContext context)
         {
@@ -27,7 +27,7 @@ namespace RmsWebApi.Repository
             context.SaveChanges();
         }
 
-        public void  Delete(T entity)
+        public void Delete(T entity)
         {
             entitySet.Remove(entity);
             context.SaveChanges();
@@ -38,7 +38,7 @@ namespace RmsWebApi.Repository
             return entitySet.ToList();
         }
 
-        public void  Update(T entity)
+        public void Update(T entity)
         {
             entitySet.Update(entity);
             context.SaveChanges();

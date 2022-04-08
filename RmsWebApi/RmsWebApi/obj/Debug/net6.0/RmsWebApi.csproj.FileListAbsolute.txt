@@ -59,3 +59,9 @@ D:\DOTNET\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\refint\RmsWebAp
 D:\DOTNET\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.pdb
 D:\DOTNET\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\RmsWebApi.genruntimeconfig.cache
 D:\DOTNET\rms_group1_webapi\RmsWebApi\RmsWebApi\obj\Debug\net6.0\ref\RmsWebApi.dll
+D:\DOTNET\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\log4net.config
+D:\DOTNET\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Castle.Core.dll
+D:\DOTNET\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\log4net.dll
+D:\DOTNET\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Proxies.dll
+D:\DOTNET\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
+D:\DOTNET\rms_group1_webapi\RmsWebApi\RmsWebApi\bin\Debug\net6.0\Newtonsoft.Json.dll

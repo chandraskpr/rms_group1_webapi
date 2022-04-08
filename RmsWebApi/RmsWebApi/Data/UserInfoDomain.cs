@@ -5,13 +5,19 @@ namespace RmsWebApi.Data
     public class UserInfoDomain
 
     {
-        [Key]
+        public UserInfoDomain()
+        {
+            userResumeDomains = new List<UserResumeDomains>();
+            NotificationList = new List<UserNotificationsDomain>();
+        }
         public int UserId { get; set; }
-        [Required]
+
         public string UserName { get; set; }
-        [Required]
+
         public string UserRole { get; set; }
-        [Required]
+
         public string UserEmail { get; set; }
+        public List<UserResumeDomains> userResumeDomains { get; set; }
+        public List<UserNotificationsDomain> NotificationList { get; set; }
     }
 }

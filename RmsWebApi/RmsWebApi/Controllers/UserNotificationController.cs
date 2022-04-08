@@ -24,7 +24,7 @@ namespace RmsWebApi.Controllers
             return this.userRepository.GetNotifications();
         }
 
-      
+
 
         // GET api/<UserNotificationController>/5
         [HttpGet("{status}")]

@@ -2,7 +2,7 @@
 
 namespace RMS.Domain.ResumeDomain
 {
-    public class WorkExperience
+    public class WorkExperienceDomain
     {
         public string ClientDescription { get; set; }
 
