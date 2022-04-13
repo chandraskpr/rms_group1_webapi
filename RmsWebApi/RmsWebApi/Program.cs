@@ -4,32 +4,49 @@ using RmsWebApi.Repository;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
 using Microsoft.EntityFrameworkCore.Proxies;
+using Newtonsoft.Json.Serialization;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.AddLog4Net(new Log4NetProviderOptions("log4net.config"));
-
 // Add services to the container.
+
 var connectionString = builder.Configuration.GetConnectionString("RMSDbConnection");
-
 builder.Services.AddDbContext<RMSContext>(options =>
+
+options.UseLazyLoadingProxies().UseSqlServer(connectionString)
+
+);
+
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IResumeRepository, ResumeRepository>();
+
+//builder.Services.AddCors(c =>
 //{
-    options.UseLazyLoadingProxies()
-    .UseSqlServer(connectionString)
- );
+//    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+//});
 
-builder.Services.AddDbContext<RMSContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddCors();
 
-builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-
+//builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+//options.JsonSerializerOptions.ReferenceHandler = options.JsonSerializerOptions.ReferenceHandler ?? ReferenceHandler.IgnoreCycles)
+//.AddJsonOptions(options => options.JsonSerializerOptions.PropertyNameCaseInsensitive = true);
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+//app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+app.UseCors(options =>
+    options.WithOrigins("http://localhost:3000")
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -43,6 +60,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.UseMiddleware<GlobalErrorMiddleware>();
+
 app.MapControllers();
 
 app.Run();

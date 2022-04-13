@@ -21,10 +21,11 @@ namespace RmsWebApi.Repository
         }
 
 
-        public void Create(T entity)
+        public T Create(T entity)
         {
             entitySet.Add(entity);
             context.SaveChanges();
+            return entity;
         }
 
         public void Delete(T entity)

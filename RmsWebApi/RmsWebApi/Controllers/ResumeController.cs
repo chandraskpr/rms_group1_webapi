@@ -25,9 +25,9 @@ namespace RmsWebApi.Controllers.API.Controller
         }
 
         [HttpPost]
-        public void Post([FromBody] ResumeDomain value)
+        public ResumeDomain Post([FromBody] ResumeDomain value)
         {
-            this.resumeRepository.Create(value);
+            return this.resumeRepository.Create(value);
         }
 
         [HttpDelete ("{id}")]

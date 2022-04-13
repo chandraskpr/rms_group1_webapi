@@ -64,10 +64,12 @@ namespace RmsWebApi.Repository
                 }
                 ).ToList(),
 
-                myDetails = context.MyDetails.Select(f => new RMS.Domain.ResumeDomain.MyDetails()
+                myDetails = x.MyDetails.Select(f => new RMS.Domain.ResumeDomain.MyDetails()
                 {
                     ProfilePicture = f.ProfilePicture,
                     TotalExp = f.TotalExp,
+                    UserName = f.UserName,  
+                    Role = f.Role,
                 }
                 ).ToList(),
 
@@ -89,7 +91,7 @@ namespace RmsWebApi.Repository
             return records;
         }
 
-        public void Create(ResumeDomain resume)
+        public ResumeDomain Create(ResumeDomain resume)
         {
             var res = new Resume()
             {
@@ -122,6 +124,8 @@ namespace RmsWebApi.Repository
                 {
                     ProfilePicture = records.ProfilePicture,
                     TotalExp = records.TotalExp,
+                    UserName = records.UserName,
+                    Role = records.Role,
                 }
                 );
             }
@@ -178,7 +182,16 @@ namespace RmsWebApi.Repository
                 );
             }
 
-            base.Create(res);
+            var response = base.Create(res);
+            if(response != null)
+            {
+                return new ResumeDomain() 
+                { 
+                    ResumeId = response.ResumeId,
+                    ResumeStatus = response.ResumeStatus,   
+                };
+            }
+            return null;
 
         }
 

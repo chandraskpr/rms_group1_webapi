@@ -165,6 +165,8 @@ namespace RmsWebApi.RMS_DB
                 entity.Property(e => e.ResumeId).HasColumnName("resumeId");
 
                 entity.Property(e => e.TotalExp).HasColumnName("totalExp");
+                entity.Property(e => e.UserName).HasColumnName("name");
+                entity.Property(e => e.Role).HasColumnName("role");
 
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.MyDetails)
