@@ -68,7 +68,7 @@ namespace RmsWebApi.Repository
                 {
                     ProfilePicture = f.ProfilePicture,
                     TotalExp = f.TotalExp,
-                    UserName = f.UserName,  
+                    UserName = f.Name,  
                     Role = f.Role,
                 }
                 ).ToList(),
@@ -124,7 +124,7 @@ namespace RmsWebApi.Repository
                 {
                     ProfilePicture = records.ProfilePicture,
                     TotalExp = records.TotalExp,
-                    UserName = records.UserName,
+                    Name = records.UserName,
                     Role = records.Role,
                 }
                 );
@@ -262,6 +262,8 @@ namespace RmsWebApi.Repository
                     {
                         ProfilePicture = records.ProfilePicture,
                         TotalExp = records.TotalExp,
+                        Name = records.UserName,
+                        Role = records.Role,
                     }
                     );
                 }
