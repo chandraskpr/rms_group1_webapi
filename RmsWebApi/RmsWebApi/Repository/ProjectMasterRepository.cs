@@ -22,7 +22,7 @@ namespace RmsWebApi.Repository
             return project;
 
         }
-        public List<ProjectMasterDomain> GetActiveRole()
+        public List<ProjectMasterDomain> GetActiveProject()
         {
             var result = base.SelectAll().Select(x => new ProjectMasterDomain()
             {

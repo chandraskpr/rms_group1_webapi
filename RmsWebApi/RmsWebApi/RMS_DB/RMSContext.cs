@@ -27,6 +27,8 @@ namespace RmsWebApi.RMS_DB
         public virtual DbSet<Resume> Resumes { get; set; } = null!;
         public virtual DbSet<RoleMaster> RoleMasters { get; set; } = null!;
         public virtual DbSet<Skill> Skills { get; set; } = null!;
+        public virtual DbSet<TechStackMaster> TechStackMasters { get; set; } = null!;
+        public virtual DbSet<TechStackValue> TechStackValues { get; set; } = null!;
         public virtual DbSet<UserInfo> UserInfos { get; set; } = null!;
         public virtual DbSet<UserNotification> UserNotifications { get; set; } = null!;
         public virtual DbSet<UserResume> UserResumes { get; set; } = null!;
@@ -304,6 +306,43 @@ namespace RmsWebApi.RMS_DB
                     .WithMany(p => p.Skills)
                     .HasForeignKey(d => d.ResumeId)
                     .HasConstraintName("FK_Skills_Resume").OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<TechStackMaster>(entity =>
+            {
+                entity.HasKey(e => e.TechStackId)
+                    .HasName("PK__TeckStac__A64E4E7742F26B41");
+
+                entity.ToTable("TechStackMaster");
+
+                entity.Property(e => e.TechStackId).HasColumnName("techStackId");
+
+                entity.Property(e => e.Category)
+                    .HasMaxLength(25)
+                    .IsUnicode(false)
+                    .HasColumnName("category");
+            });
+
+            modelBuilder.Entity<TechStackValue>(entity =>
+            {
+                entity.HasKey(e => e.ValueId)
+                    .HasName("PK__TechStac__4C5414233DCB3F0B");
+
+                entity.Property(e => e.ValueId).HasColumnName("valueId");
+
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
+                entity.Property(e => e.TechStackId).HasColumnName("techStackId");
+
+                entity.Property(e => e.ValueName)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("valueName");
+
+                entity.HasOne(d => d.TechStack)
+                    .WithMany(p => p.TechStackValues)
+                    .HasForeignKey(d => d.TechStackId)
+                    .HasConstraintName("FK__TechStack__techS__73BA3083");
             });
 
             modelBuilder.Entity<UserInfo>(entity =>

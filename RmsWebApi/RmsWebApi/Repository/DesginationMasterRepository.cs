@@ -26,7 +26,7 @@ namespace RmsWebApi.Repository
 
         }
 
-        public List<DesginationMasterDomain> GetActiveRole()
+        public List<DesginationMasterDomain> GetActiveDesignation()
         {
             var result = base.SelectAll().Select(x => new DesginationMasterDomain()
             {

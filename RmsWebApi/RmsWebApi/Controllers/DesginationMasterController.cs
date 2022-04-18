@@ -25,7 +25,7 @@ namespace RmsWebApi.Controllers
         }
 
         [HttpGet("{isDeleted}")]
-        public DesginationMasterDomain Get(bool isDeleted)
+        public DesginationMasterDomain GetActiveDesignation(bool isDeleted)
         {
             return this.designationMasterRepository.GetAll().FirstOrDefault(d => d.IsDeleted == isDeleted);
         }

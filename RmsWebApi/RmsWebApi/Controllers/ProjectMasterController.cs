@@ -25,7 +25,7 @@ namespace RmsWebApi.Controllers
         }
 
         [HttpGet("{isDeleted}")]
-        public ProjectMasterDomain GetActiveRoll(bool isDeleted)
+        public ProjectMasterDomain GetActiveProject(bool isDeleted)
         {
             return this.projectMasterRepository.GetAll().FirstOrDefault(x => x.IsDeleted == isDeleted);
         }
