@@ -40,8 +40,6 @@ namespace RmsWebApi.Repository
                 achievements = x.Achievements.Select(c => new RMS.Domain.ResumeDomain.Achievements()
                 {
                     AchievementName = c.AchievementName,
-                    AchievementYear = c.AchievementYear,
-                    AchievementDescription = c.AchievementDesc,
                 }
                 ).ToList(),
 
@@ -60,7 +58,6 @@ namespace RmsWebApi.Repository
                 memberships = x.Memberships.Select(e => new RMS.Domain.ResumeDomain.Memberships()
                 {
                     MembershipName = e.MembershipName,
-                    MembershipDescription = e.MembershipDesc,
                 }
                 ).ToList(),
 
@@ -86,6 +83,18 @@ namespace RmsWebApi.Repository
                     TechnologyStack = g.TechnologyStack,
                 }
                 ).ToList(),
+
+                certifications = x.Certifications.Select(p => new CertificationDomain()
+                {
+                    CertificationId = p.CertificationId,
+                    CertificationName = p.CertificationName,
+                }).ToList(),
+
+                trainings = x.training.Select(p => new TrainingDomain()
+                {
+                    TrainingId = p.TrainingId,
+                    Trainingname = p.Trainingname
+                }).ToList(),
 
             }).ToList();
             return records;
@@ -135,8 +144,6 @@ namespace RmsWebApi.Repository
                 res.Achievements.Add(new Achievement()
                 {
                     AchievementName = records.AchievementName,
-                    AchievementYear = records.AchievementYear,
-                    AchievementDesc = records.AchievementDescription,
                 }
                 );
             }
@@ -146,7 +153,6 @@ namespace RmsWebApi.Repository
                 res.Memberships.Add(new Membership()
                 {
                     MembershipName = records.MembershipName,
-                    MembershipDesc = records.MembershipDescription, 
                 }
                 );
             }
@@ -180,6 +186,24 @@ namespace RmsWebApi.Repository
                     University = records.University,
                 }
                 );
+            }
+
+            foreach (var record in resume.certifications)
+            {
+                res.Certifications.Add(new Certification()
+                {
+                    CertificationId = record.CertificationId,
+                    CertificationName = record.CertificationName,
+                });
+            }
+
+            foreach (var record in resume.trainings)
+            {
+                res.training.Add(new training()
+                {
+                    TrainingId = record.TrainingId,
+                    Trainingname = record.Trainingname
+                });
             }
 
             var response = base.Create(res);
@@ -273,8 +297,6 @@ namespace RmsWebApi.Repository
                     res.Achievements.Add(new Achievement()
                     {
                         AchievementName = records.AchievementName,
-                        AchievementYear = records.AchievementYear,
-                        AchievementDesc = records.AchievementDescription,
                     }
                     );
                 }
@@ -284,7 +306,6 @@ namespace RmsWebApi.Repository
                     res.Memberships.Add(new Membership()
                     {
                         MembershipName = records.MembershipName,
-                        MembershipDesc = records.MembershipDescription,
                     }
                     );
                 }
@@ -318,6 +339,24 @@ namespace RmsWebApi.Repository
                         University = records.University,
                     }
                     );
+                }
+
+                foreach (var record in resume.certifications)
+                {
+                    res.Certifications.Add(new Certification()
+                    {
+                        CertificationId = record.CertificationId,
+                        CertificationName = record.CertificationName,
+                    });
+                }
+
+                foreach (var record in resume.trainings)
+                {
+                    res.training.Add(new training()
+                    {
+                        TrainingId = record.TrainingId,
+                        Trainingname = record.Trainingname
+                    });
                 }
 
                 base.Update(res);
