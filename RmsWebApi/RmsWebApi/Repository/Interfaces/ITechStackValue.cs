@@ -10,6 +10,7 @@ namespace RmsWebApi.Repository.Interfaces
 
         public void Delete(int TechId);
 
+        public List<TechStackValueDomain> GetActiveTech();
         public void Update(int TechId, TechStackValueDomain TValue);
     }
 }

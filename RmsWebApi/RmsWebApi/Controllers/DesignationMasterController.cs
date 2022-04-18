@@ -21,6 +21,12 @@ namespace RmsWebApi.Controllers
             return this.designationMasterRepository.GetAll();
         }
 
+        [HttpGet("{isDeleted}")]
+        public DesignationMasterDomain Get(bool isDeleted)
+        {
+            return this.designationMasterRepository.GetAll().FirstOrDefault(d => d.IsDeleted == isDeleted);
+        }
+
 
         // POST api/<RoleMasterController>
         [HttpPost]

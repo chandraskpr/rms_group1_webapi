@@ -11,6 +11,7 @@ namespace RmsWebApi.Repository.Interfaces
 
         public void Delete(int projectId);
 
+        public List<ProjectMasterDomain> GetActiveProject();
         public void Update(int projectId, ProjectMasterDomain project);
     }
 }

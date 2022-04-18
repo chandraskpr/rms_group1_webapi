@@ -24,7 +24,12 @@ namespace RmsWebApi.Controllers
             return this.roleMasterRepository.GetAll();
         }
 
-       
+        [HttpGet("{isDeleted}")]
+        public RoleMasterDomain Get(bool isDeleted)
+        {
+            return this.roleMasterRepository.GetAll().FirstOrDefault(x => x.IsDeleted == isDeleted);
+        }
+
         // POST api/<RoleMasterController>
         [HttpPost]
         public int Post([FromBody] RoleMasterDomain value)

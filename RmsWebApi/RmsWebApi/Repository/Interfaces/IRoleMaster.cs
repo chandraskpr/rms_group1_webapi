@@ -11,6 +11,7 @@ namespace RmsWebApi.Repository.Interfaces
 
         public void Delete(int roleId);
 
+        public List<RoleMasterDomain> GetActiveRole();
         public void Update(int roleId, RoleMasterDomain role);
     }
 }

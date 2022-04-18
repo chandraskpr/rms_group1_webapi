@@ -21,6 +21,11 @@ namespace RmsWebApi.Controllers
             return this.projectMasterRepository.GetAll();
         }
 
+        [HttpGet("{isDeleted}")]
+        public ProjectMasterDomain GetActiveRoll(bool isDeleted)
+        {
+            return this.projectMasterRepository.GetAll().FirstOrDefault(x => x.IsDeleted == isDeleted);
+        }
 
         // POST api/<RoleMasterController>
         [HttpPost]

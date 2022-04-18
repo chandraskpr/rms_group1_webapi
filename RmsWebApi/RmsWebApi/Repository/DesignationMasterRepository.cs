@@ -23,6 +23,17 @@ namespace RmsWebApi.Repository
             return designations;
 
         }
+        public List<DesignationMasterDomain> GetActiveDesignations()
+        {
+            var result = base.SelectAll().Select(x => new DesignationMasterDomain()
+            {
+                DesignationId= x.DesignationId,
+                DesignationName= x.DesignationName,
+                DesignationDescription= x.DesignationDescription,
+                IsDeleted = x.IsDeleted,
+            }).ToList();
+            return result;
+        }
         public int Create(DesignationMasterDomain designation)
         {
             var res = new DesignationMaster()

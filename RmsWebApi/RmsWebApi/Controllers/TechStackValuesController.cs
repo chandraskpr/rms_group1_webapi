@@ -26,6 +26,12 @@ namespace RmsWebApi.Controllers
             return this.valueRepository.GetAll();
         }
 
+        [HttpGet("{isDeleted}")]
+        public TechStackValueDomain Get(bool isDeleted)
+        {
+            return this.valueRepository.GetAll().FirstOrDefault(x => x.IsDeleted == isDeleted);
+        }
+
         [HttpPost]
         public int Post([FromBody] TechStackValueDomain value)
         {
