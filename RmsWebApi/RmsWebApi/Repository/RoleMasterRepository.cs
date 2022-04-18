@@ -24,6 +24,19 @@ namespace RmsWebApi.Repository
             return role;
 
         }
+
+        public List<RoleMasterDomain> GetActiveRole()
+        {
+            return base.SelectAll().Select(x => new RoleMasterDomain() 
+            { 
+                RoleId = x.RoleId,
+                RoleName= x.RoleName,
+                RoleDesc= x.RoleDesc,
+                IsDeleted= x.IsDeleted,
+            }).ToList();
+   
+        }
+
         public int Create(RoleMasterDomain role)
         {
             var res = new RoleMaster()
@@ -60,4 +73,5 @@ namespace RmsWebApi.Repository
             base.Update(res);
         }
     }
+
 }

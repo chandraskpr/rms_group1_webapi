@@ -25,6 +25,19 @@ namespace RmsWebApi.Repository
             return designations;
 
         }
+
+        public List<DesginationMasterDomain> GetActiveRole()
+        {
+            var result = base.SelectAll().Select(x => new DesginationMasterDomain()
+            {
+                DesginationId = x.DesginationId,
+                DesginationName = x.DesginationName,
+                DesginationDescription = x.DesginationDescription,
+                IsDeleted = x.IsDeleted,
+            }).ToList();
+            return result;
+        }
+
         public int Create(DesginationMasterDomain designation)
         {
             var res = new DesginationMaster()

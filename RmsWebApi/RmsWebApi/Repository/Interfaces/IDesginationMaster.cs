@@ -11,5 +11,6 @@ namespace RmsWebApi.Repository.Interfaces
         public void Delete(int degId);
 
         public void Update(int degId, DesginationMasterDomain designation);
+        public List<DesginationMasterDomain> GetActiveRole();
     }
 }
