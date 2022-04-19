@@ -26,7 +26,7 @@ namespace RmsWebApi.Repository
 
         public List<TechStackValueDomain> GetActiveTech()
         {
-            var result = base.SelectAll().Select(x => new TechStackValueDomain()
+            var result = base.SelectAll().Where(x => !x.IsDeleted).Select(x => new TechStackValueDomain()
             {
                 TechStackId= x.TechStackId,
                 ValueId= x.ValueId,

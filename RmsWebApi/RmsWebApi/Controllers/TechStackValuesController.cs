@@ -26,6 +26,13 @@ namespace RmsWebApi.Controllers
             return this.valueRepository.GetAll();
         }
 
+        [HttpGet]
+        [Route("GetActiveTechs")]
+        public List<TechStackValueDomain> GetActiveTechs()
+        {
+            return this.valueRepository.GetActiveTech();
+        }
+
         [HttpGet("{isDeleted}")]
         public TechStackValueDomain Get(bool isDeleted)
         {

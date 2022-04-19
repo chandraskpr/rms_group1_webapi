@@ -24,7 +24,7 @@ namespace RmsWebApi.Repository
 
         public List<SkillsMasterDomain> GetActiveSkills()
         {
-            var result = base.SelectAll().Select(x => new SkillsMasterDomain()
+            var result = base.SelectAll().Where(x => x.IsDeleted.HasValue && !x.IsDeleted.Value).Select(x => new SkillsMasterDomain()
             {
                 SkillsId=x.SkillsId,
                 SkillName=x.SkillName,

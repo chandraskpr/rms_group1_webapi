@@ -24,6 +24,14 @@ namespace RmsWebApi.Controllers
                 return this.skillMasterRepository.GetAll();
             }
 
+
+        [HttpGet]
+        [Route("GetActiveSkill")]
+        public List<SkillsMasterDomain> GetActiveSkill()
+        {
+            return this.skillMasterRepository.GetActiveSkills();
+        }
+
         [HttpGet("{isDeleted}")]
         public SkillsMasterDomain Get(bool isDeleted)
         {

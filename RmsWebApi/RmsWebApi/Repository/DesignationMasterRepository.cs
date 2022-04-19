@@ -25,7 +25,7 @@ namespace RmsWebApi.Repository
         }
         public List<DesignationMasterDomain> GetActiveDesignations()
         {
-            var result = base.SelectAll().Select(x => new DesignationMasterDomain()
+            var result = base.SelectAll().Where(x => x.IsDeleted.HasValue && !x.IsDeleted.Value).Select(x => new DesignationMasterDomain()
             {
                 DesignationId= x.DesignationId,
                 DesignationName= x.DesignationName,
