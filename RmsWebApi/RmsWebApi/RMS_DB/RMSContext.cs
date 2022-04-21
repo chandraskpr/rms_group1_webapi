@@ -27,6 +27,7 @@ namespace RmsWebApi.RMS_DB
         public virtual DbSet<Resume> Resumes { get; set; } = null!;
         public virtual DbSet<RoleMaster> RoleMasters { get; set; } = null!;
         public virtual DbSet<Skill> Skills { get; set; } = null!;
+        public virtual DbSet<SkillsMaster> SkillsMasters { get; set; } = null!;
         public virtual DbSet<TechStackMaster> TechStackMasters { get; set; } = null!;
         public virtual DbSet<TechStackValue> TechStackValues { get; set; } = null!;
         public virtual DbSet<UserInfo> UserInfos { get; set; } = null!;
@@ -302,11 +303,39 @@ namespace RmsWebApi.RMS_DB
 
                 entity.Property(e => e.ResumeId).HasColumnName("resumeID");
 
+                entity.Property(e => e.SkillName)
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasColumnName("skillName");
+
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.Skills)
                     .HasForeignKey(d => d.ResumeId)
                     .HasConstraintName("FK_Skills_Resume").OnDelete(DeleteBehavior.Cascade);
             });
+
+            modelBuilder.Entity<SkillsMaster>(entity =>
+            {
+                entity.HasKey(e => e.SkillsId)
+                    .HasName("PK__SkillsMa__CF77BD794EE76F0A");
+
+                entity.ToTable("SkillsMaster");
+
+                entity.Property(e => e.SkillsId).HasColumnName("skillsId");
+
+                entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+
+                entity.Property(e => e.SkillCategory)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("skillCategory");
+
+                entity.Property(e => e.SkillName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("skillName");
+            });
+
 
             modelBuilder.Entity<TechStackMaster>(entity =>
             {

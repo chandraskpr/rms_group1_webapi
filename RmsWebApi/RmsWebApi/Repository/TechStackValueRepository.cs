@@ -23,6 +23,18 @@ namespace RmsWebApi.Repository
             return project;
 
         }
+
+        public List<TechStackValueDomain> GetActiveTech()
+        {
+            var result = base.SelectAll().Where(x => !x.IsDeleted).Select(x => new TechStackValueDomain()
+            {
+                TechStackId = x.TechStackId,
+                ValueId = x.ValueId,
+                ValueName = x.ValueName,
+                IsDeleted = x.IsDeleted,
+            }).ToList();
+            return result;
+        }
         public int Create(TechStackValueDomain TValue)
         {
             var res = new TechStackValue()

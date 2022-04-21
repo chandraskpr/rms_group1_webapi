@@ -24,6 +24,13 @@ namespace RmsWebApi.Controllers
             return this.projectMasterRepository.GetAll();
         }
 
+        [HttpGet]
+        [Route("GetActiveProjects")]
+        public List<ProjectMasterDomain> GetActiveProjects()
+        {
+            return this.projectMasterRepository.GetActiveProject();
+        }
+
         [HttpGet("{isDeleted}")]
         public ProjectMasterDomain GetActiveProject(bool isDeleted)
         {

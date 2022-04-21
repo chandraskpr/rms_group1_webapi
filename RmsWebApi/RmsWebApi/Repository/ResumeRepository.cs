@@ -27,6 +27,7 @@ namespace RmsWebApi.Repository
                 SkillList = x.Skills.Select(a => new RMS.Domain.ResumeDomain.Skills()
                 {
                     Category = a.Category,
+                    SkillName = a.SkillName,
                 }
                 ).ToList(),
 
@@ -114,6 +115,7 @@ namespace RmsWebApi.Repository
                 res.Skills.Add(new Skill()
                 {
                     Category = record.Category,
+                    SkillName = record.SkillName,
                 }
                 );
             };
@@ -266,6 +268,7 @@ namespace RmsWebApi.Repository
                     res.Skills.Add(new Skill()
                     {
                         Category = record.Category,
+                        SkillName = record.SkillName,
                     }
                     );
                 }

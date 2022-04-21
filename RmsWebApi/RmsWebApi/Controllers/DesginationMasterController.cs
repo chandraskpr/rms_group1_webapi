@@ -24,6 +24,13 @@ namespace RmsWebApi.Controllers
             return this.designationMasterRepository.GetAll();
         }
 
+        [HttpGet]
+        [Route("GetActiveDesignation")]
+        public List<DesginationMasterDomain> GetActiveDesignation()
+        {
+            return this.designationMasterRepository.GetActiveDesignation();
+        }
+
         [HttpGet("{isDeleted}")]
         public DesginationMasterDomain GetActiveDesignation(bool isDeleted)
         {

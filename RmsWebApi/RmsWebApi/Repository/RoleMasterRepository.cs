@@ -27,14 +27,14 @@ namespace RmsWebApi.Repository
 
         public List<RoleMasterDomain> GetActiveRole()
         {
-            return base.SelectAll().Select(x => new RoleMasterDomain() 
-            { 
+            var result = base.SelectAll().Where(x => x.IsDeleted.HasValue && !x.IsDeleted.Value).Select(x => new RoleMasterDomain()
+            {
                 RoleId = x.RoleId,
-                RoleName= x.RoleName,
-                RoleDesc= x.RoleDesc,
-                IsDeleted= x.IsDeleted,
+                RoleDesc = x.RoleDesc,
+                RoleName = x.RoleName,
+                IsDeleted = x.IsDeleted,
             }).ToList();
-   
+            return result;
         }
 
         public int Create(RoleMasterDomain role)
