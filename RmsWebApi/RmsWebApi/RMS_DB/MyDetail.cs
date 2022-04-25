@@ -7,7 +7,7 @@ namespace RmsWebApi.RMS_DB
     {
         public int UserdetailsId { get; set; }
         public int? ResumeId { get; set; }
-        public string? ProfilePicture { get; set; }
+        public byte[]? ProfilePicture { get; set; }
         public double? TotalExp { get; set; }
         public string Name { get; set; } = null!;
         public string Role { get; set; } = null!;
