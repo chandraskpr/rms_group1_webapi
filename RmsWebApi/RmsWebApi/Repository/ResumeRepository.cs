@@ -101,6 +101,94 @@ namespace RmsWebApi.Repository
             return records;
         }
 
+        public List<ResumeDomain> GetNonDraftResume()
+        {
+            var result = base.SelectAll().Where(x => x.ResumeStatus != "Draft").Select(x => new ResumeDomain()
+            {
+                ResumeId = x.ResumeId,
+                ResumeTitle = x.ResumeTitle,
+                ResumeStatus = x.ResumeStatus,
+                UpdationDate = x.UpdationDate,
+                CreationDate = x.CreationDate,
+
+                SkillList = x.Skills.Select(a => new RMS.Domain.ResumeDomain.Skills()
+                {
+                    Category = a.Category,
+                    SkillName = a.SkillName,
+                }
+                ).ToList(),
+
+                aboutMes = x.AboutMes.Select(b => new RMS.Domain.ResumeDomain.AboutMes()
+                {
+                    KeyPoints = b.KeyPoints,
+                    MainDescription = b.MainDescription,
+                }
+                ).ToList(),
+
+                achievements = x.Achievements.Select(c => new RMS.Domain.ResumeDomain.Achievements()
+                {
+                    AchievementName = c.AchievementName,
+                }
+                ).ToList(),
+
+                educationDetails = x.EducationDetails.Select(d => new RMS.Domain.ResumeDomain.EducationDetails()
+                {
+                    EducationDetailsId = d.EducationId,
+                    CourseName = d.CourseName,
+                    Stream = d.Specialization,
+                    InstitutionName = d.InstituteName,
+                    PassingYear = d.PassingYear,
+                    Marks = d.Marks,
+                    University = d.University,
+                }
+                ).ToList(),
+
+                memberships = x.Memberships.Select(e => new RMS.Domain.ResumeDomain.Memberships()
+                {
+                    MembershipName = e.MembershipName,
+                }
+                ).ToList(),
+
+                myDetails = x.MyDetails.Select(f => new RMS.Domain.ResumeDomain.MyDetails()
+                {
+                    ProfilePicture = f.ProfilePicture,
+                    TotalExp = f.TotalExp,
+                    UserName = f.Name,
+                    Role = f.Role,
+                }
+                ).ToList(),
+
+                workExperienceDomains = x.WorkExperiences.Select(g => new RMS.Domain.ResumeDomain.WorkExperienceDomain()
+                {
+                    ClientDescription = g.ClientDescription,
+                    Country = g.Country,
+                    ProjectName = g.ProjectName,
+                    ProjectRole = g.ProjectRole,
+                    ProjectResponsibilities = g.ProjectResponsibilities,
+                    StartDate = g.StartDate,
+                    EndDate = g.EndDate,
+                    BusinessSolution = g.BusinessSolution,
+                    TechnologyStack = g.TechnologyStack,
+                }
+                ).ToList(),
+
+                certifications = x.Certifications.Select(p => new CertificationDomain()
+                {
+                    CertificationId = p.CertificationId,
+                    CertificationName = p.CertificationName,
+                }).ToList(),
+
+                trainings = x.training.Select(p => new TrainingDomain()
+                {
+                    TrainingId = p.TrainingId,
+                    Trainingname = p.Trainingname
+                }).ToList(),
+
+            }).ToList();
+
+            return result;
+        }
+
         public ResumeDomain Create(ResumeDomain resume)
         {
             var res = new Resume()

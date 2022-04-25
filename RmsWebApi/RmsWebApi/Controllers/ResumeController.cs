@@ -23,6 +23,14 @@ namespace RmsWebApi.Controllers.API.Controller
         {
             return this.resumeRepository.GetAll();
         }
+
+        [HttpGet]
+        [Route("GetNonDraftResume")]
+        public List<ResumeDomain> GetNonDraftResume()
+        {
+            return this.resumeRepository.GetNonDraftResume();
+        }
+
         [HttpGet("{id}")]
         public ResumeDomain Get(int id)
         {
