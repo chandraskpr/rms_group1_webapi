@@ -102,6 +102,89 @@ namespace RmsWebApi.Repository
             return records;
         }
 
+        public List<ResumeDomain> GetNonDraftResume()
+        {
+            var result = base.SelectAll().Where(x => x.ResumeStatus != "Draft").Select(x => new ResumeDomain()
+            {
+                ResumeId = x.ResumeId,
+                ResumeTitle = x.ResumeTitle,
+                ResumeStatus = x.ResumeStatus,
+                UpdationDate = x.UpdationDate,
+                CreationDate = x.CreationDate,
+
+
+                SkillList = x.Skills.Select(s => new RMS.Domain.ResumeDomain.SkillsDomain()
+                {
+                    Category = s.Category,
+                    SkillName = s.SkillName,
+
+                }).ToList(),
+
+                aboutMe = x.AboutMes.Select(b => new RMS.Domain.ResumeDomain.AboutMeDomain()
+                {
+                    KeyPoints = b.KeyPoints,
+                    MainDescription = b.MainDescription,
+                }).ToList(),
+
+                achivements = x.Achievements.Select(c => new RMS.Domain.ResumeDomain.AchievementsDomain()
+                {
+                    AchievementName = c.AchievementName,
+                }).ToList(),
+
+                memberships = x.Memberships.Select(e => new RMS.Domain.ResumeDomain.MembershipsDomain()
+                {
+                    MembershipName = e.MembershipName,
+                }).ToList(),
+
+                myDetails = x.MyDetails.Select(f => new RMS.Domain.ResumeDomain.MyDetailsDomain()
+                {
+                    ProfilePicture = f.ProfilePicture,
+                    TotalExp = (float)f.TotalExp,
+                    UserName = f.Name,
+                    Role = f.Role,
+                }).ToList(),
+
+                workExperience = x.WorkExperiences.Select(g => new RMS.Domain.ResumeDomain.WorkExperienceDomain()
+                {
+                    ClientDescription = g.ClientDescription,
+                    Country = g.Country,
+                    ProjectName = g.ProjectName,
+                    ProjectRole = g.ProjectRole,
+                    ProjectResponsibilities = g.ProjectResponsibilities,
+                    StartDate = g.StartDate,
+                    EndDate = g.EndDate,
+                    BusinessSolution = g.BusinessSolution,
+                    TechnologyStack = g.TechnologyStack,
+                }).ToList(),
+
+                educationDetails = x.EducationDetails.Select(d => new RMS.Domain.ResumeDomain.EducationDetailsDomain()
+                {
+                    EducationalDetailsId = d.EducationId,
+                    CourseName = d.CourseName,
+                    Stream = d.Specialization,
+                    InstitutionName = d.InstituteName,
+                    PassingYear = d.PassingYear,
+                    Marks = (float)d.Marks,
+                    University = d.University,
+                }).ToList(),
+
+             
+                certifications = x.Certifications.Select(p => new CertificationDomain()
+                {
+                    CertificationId = p.CertificationId,
+                    CertificationName = p.CertificationName,
+                }).ToList(),
+
+                trainings = x.training.Select(p => new TrainingDomain()
+                {
+                    TrainingId = p.TrainingId,
+                    Trainingname = p.Trainingname
+                }).ToList()
+
+            }).ToList();
+
+            return result;
+        }
         public ResumeDomain Create(ResumeDomain resume)
         {
             var res = new Resume()

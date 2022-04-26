@@ -31,6 +31,7 @@ namespace RmsWebApi.Repository
                 RoleId=x.RoleId,
                 RoleDescription=x.RoleDescription,
                 RoleName=x.RoleName,
+                IsDeleted=x.IsDeleted
             }).ToList();
             return result;
         }

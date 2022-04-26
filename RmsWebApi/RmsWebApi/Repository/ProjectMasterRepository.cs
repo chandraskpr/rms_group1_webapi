@@ -17,6 +17,7 @@ namespace RmsWebApi.Repository
                ProjectId = x.ProjectId,
                ProjectName = x.ProjectName,
                ProjectDescription = x.ProjectDescription,
+               IsDeleted = x.IsDeleted
             }).ToList();
             return project;
 
@@ -40,7 +41,7 @@ namespace RmsWebApi.Repository
                 ProjectId=project.ProjectId,
                 ProjectName=project.ProjectName,
                 ProjectDescription=project.ProjectDescription,
-
+                IsDeleted=project.IsDeleted,
             };
             var response = base.Create(res);
             return response.ProjectId;

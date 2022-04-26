@@ -24,6 +24,19 @@ namespace RmsWebApi.Controllers.API.Controller
             return this.resumeRepository.GetAll();
         }
 
+        [HttpGet("{id}")]
+        public ResumeDomain Get(int id)
+        {
+            return this.resumeRepository.GetAll().FirstOrDefault(x =>x.ResumeId==id);
+        }
+
+        [HttpGet]
+        [Route("GetNonDraftResume")]
+        public List<ResumeDomain> GetNonDraftResume()
+        {
+            return this.resumeRepository.GetNonDraftResume();
+        }
+
         [HttpPost]
         public ResumeDomain Post([FromBody] ResumeDomain value)
         {

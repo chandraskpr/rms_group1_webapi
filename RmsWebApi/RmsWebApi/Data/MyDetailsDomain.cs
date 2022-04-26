@@ -3,7 +3,7 @@ namespace RMS.Domain.ResumeDomain
 {
     public class MyDetailsDomain
     {
-        public string ProfilePicture { get; set; }
+        public byte[]? ProfilePicture { get; set; }
         public float TotalExp { get; set; }
 
         public string UserName { get; set; }
