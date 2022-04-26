@@ -13,6 +13,7 @@ namespace RmsWebApi.RMS_DB
             EducationDetails = new HashSet<EducationDetail>();
             Memberships = new HashSet<Membership>();
             MyDetails = new HashSet<MyDetail>();
+            ReviewTables = new HashSet<ReviewTable>();
             Skills = new HashSet<Skill>();
             UserResumes = new HashSet<UserResume>();
             WorkExperiences = new HashSet<WorkExperience>();
@@ -31,6 +32,7 @@ namespace RmsWebApi.RMS_DB
         public virtual ICollection<EducationDetail> EducationDetails { get; set; }
         public virtual ICollection<Membership> Memberships { get; set; }
         public virtual ICollection<MyDetail> MyDetails { get; set; }
+        public virtual ICollection<ReviewTable> ReviewTables { get; set; }
         public virtual ICollection<Skill> Skills { get; set; }
         public virtual ICollection<UserResume> UserResumes { get; set; }
         public virtual ICollection<WorkExperience> WorkExperiences { get; set; }

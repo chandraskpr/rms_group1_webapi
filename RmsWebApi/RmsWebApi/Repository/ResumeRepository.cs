@@ -49,10 +49,10 @@ namespace RmsWebApi.Repository
 
                 myDetails = x.MyDetails.Select(f => new RMS.Domain.ResumeDomain.MyDetailsDomain()
                 {
-                   ProfilePicture = f.ProfilePicture,
-                   TotalExp = (float)f.TotalExp,
-                   UserName = f.Name,
-                   Role = f.Role,
+                    ProfilePicture = f.ProfilePicture,
+                    TotalExp = (float)f.TotalExp,
+                    UserName = f.Name,
+                    Role = f.Role,
                 }).ToList(),
 
                 workExperience = x.WorkExperiences.Select(g => new RMS.Domain.ResumeDomain.WorkExperienceDomain()
@@ -72,14 +72,14 @@ namespace RmsWebApi.Repository
                 {
                     EducationalDetailsId = d.EducationId,
                     CourseName = d.CourseName,
-                    Stream=d.Specialization,
+                    Stream = d.Specialization,
                     InstitutionName = d.InstituteName,
                     PassingYear = d.PassingYear,
                     Marks = (float)d.Marks,
                     University = d.University,
                 }).ToList(),
 
-                userResumes = x.UserResumes.Select(p =>new UserResumeDomain()
+                userResumes = x.UserResumes.Select(p => new UserResumeDomain()
                 {
                     UserId = p.UserId,
                     ResumeId = p.ResumeId,
@@ -95,7 +95,15 @@ namespace RmsWebApi.Repository
                 trainings = x.training.Select(p => new TrainingDomain()
                 {
                     TrainingId = p.TrainingId,
-                    Trainingname=p.Trainingname
+                    Trainingname = p.Trainingname
+                }).ToList(),
+
+                reviews = x.ReviewTables.Select(a => new ReviewTableDomain()
+                {
+                    ReviewId = a.ReviewId,
+                    ReviewComment = a.ReviewComment,
+                    ResumeId = a.ResumeId,
+                    ReviewerId = a.ReviewerId,
                 }).ToList()
 
             }).ToList();
@@ -179,6 +187,14 @@ namespace RmsWebApi.Repository
                 {
                     TrainingId = p.TrainingId,
                     Trainingname = p.Trainingname
+                }).ToList(),
+
+                reviews = x.ReviewTables.Select(a => new ReviewTableDomain()
+                {
+                    ReviewId = a.ReviewId,
+                    ReviewComment = a.ReviewComment,
+                    ResumeId = a.ResumeId,
+                    ReviewerId = a.ReviewerId,
                 }).ToList()
 
             }).ToList();
@@ -295,6 +311,18 @@ namespace RmsWebApi.Repository
                 });
             }
 
+            foreach (var record in resume.reviews)
+            {
+                res.ReviewTables.Add(new ReviewTable()
+                {
+                    ReviewId = record.ReviewId,
+                    ReviewerId = record.ReviewerId,
+                    ReviewComment = record.ReviewComment,
+                    ResumeId = record.ResumeId
+                });
+            }
+
+
             var response = base.Create(res);
             if (response != null)
             {
@@ -323,6 +351,7 @@ namespace RmsWebApi.Repository
                 .Include(x =>x.UserResumes)
                 .Include(x =>x.Certifications)
                 .Include(x =>x.training)
+                .Include(x =>x.ReviewTables)
                 .FirstOrDefault(x => x.ResumeId == ResumeId);
 
             if (res!= null)
@@ -438,6 +467,17 @@ namespace RmsWebApi.Repository
                     {
                         TrainingId = record.TrainingId,
                         Trainingname = record.Trainingname
+                    });
+                }
+
+                foreach (var record in resume.reviews)
+                {
+                    res.ReviewTables.Add(new ReviewTable()
+                    {
+                        ReviewId = record.ReviewId,
+                        ReviewerId = record.ReviewerId,
+                        ReviewComment = record.ReviewComment,
+                        ResumeId = record.ResumeId
                     });
                 }
                 base.Update(res);

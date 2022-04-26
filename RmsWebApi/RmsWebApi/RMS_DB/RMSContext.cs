@@ -25,6 +25,7 @@ namespace RmsWebApi.RMS_DB
         public virtual DbSet<MyDetail> MyDetails { get; set; } = null!;
         public virtual DbSet<ProjectMaster> ProjectMasters { get; set; } = null!;
         public virtual DbSet<Resume> Resumes { get; set; } = null!;
+        public virtual DbSet<ReviewTable> ReviewTables { get; set; } = null!;
         public virtual DbSet<RoleMaster> RoleMasters { get; set; } = null!;
         public virtual DbSet<Skill> Skills { get; set; } = null!;
         public virtual DbSet<SkillsMaster> SkillsMasters { get; set; } = null!;
@@ -205,8 +206,7 @@ namespace RmsWebApi.RMS_DB
                     .HasColumnName("name");
 
                 entity.Property(e => e.ProfilePicture)
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
+                    .HasMaxLength(50)
                     .HasColumnName("profilePicture");
 
                 entity.Property(e => e.ResumeId).HasColumnName("resumeId");
@@ -269,6 +269,34 @@ namespace RmsWebApi.RMS_DB
                 entity.Property(e => e.UpdationDate)
                     .HasColumnType("datetime")
                     .HasColumnName("updationDate");
+            });
+
+            modelBuilder.Entity<ReviewTable>(entity =>
+            {
+                entity.HasKey(e => e.ReviewId)
+                    .HasName("PK__ReviewTa__2ECD6E044907FE41");
+
+                entity.ToTable("ReviewTable");
+
+                entity.Property(e => e.ReviewId).HasColumnName("reviewId");
+
+                entity.Property(e => e.ResumeId).HasColumnName("resumeId");
+
+                entity.Property(e => e.ReviewComment)
+                    .HasColumnType("text")
+                    .HasColumnName("reviewComment");
+
+                entity.Property(e => e.ReviewerId).HasColumnName("reviewerId");
+
+                entity.HasOne(d => d.Resume)
+                    .WithMany(p => p.ReviewTables)
+                    .HasForeignKey(d => d.ResumeId)
+                    .HasConstraintName("FK__ReviewTab__resum__0C85DE4D");
+
+                entity.HasOne(d => d.Reviewer)
+                    .WithMany(p => p.ReviewTables)
+                    .HasForeignKey(d => d.ReviewerId)
+                    .HasConstraintName("FK__ReviewTab__revie__0D7A0286");
             });
 
             modelBuilder.Entity<RoleMaster>(entity =>
