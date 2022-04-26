@@ -1,4 +1,5 @@
-﻿using RmsWebApi.Data;
+﻿using RMS.Domain.ResumeDomain;
+using RmsWebApi.Data;
 using RmsWebApi.RMS_DB;
 
 namespace RmsWebApi.Repository.Interfaces
@@ -14,5 +15,7 @@ namespace RmsWebApi.Repository.Interfaces
         public void Update(int ResumeId, ResumeDomain resume);
 
         public List<ResumeDomain> GetNonDraftResume();
+
+        //public List<SkillsDomain> FilterBySkills(string name);
     }
 }

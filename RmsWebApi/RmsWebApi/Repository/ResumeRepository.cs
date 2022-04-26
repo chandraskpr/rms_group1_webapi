@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RMS.Domain.ResumeDomain;
 using RmsWebApi.Data;
 using RmsWebApi.Repository.Interfaces;
 using RmsWebApi.RMS_DB;
@@ -485,5 +486,17 @@ namespace RmsWebApi.Repository
             }
 
         }
+        //public List<SkillsDomain> FilterBySkills(string name)
+        //{
+        //   var res = context.Skills.Select(x => new SkillsDomain()
+        //   {
+        //       SkillName = x.SkillName,
+        //       Category = x.Category,
+
+        //   }).Where(x => x.SkillName == name).ToList();
+        //   return res;
+
+        //}
+
     }
 }

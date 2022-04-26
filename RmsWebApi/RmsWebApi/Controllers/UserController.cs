@@ -52,5 +52,26 @@ namespace RmsWebApi.Controllers
         {
             this.userRepository.Delete(id);
         }
+
+        [HttpGet]
+        [Route("GetComment/{UserId}")]
+        public List<ReviewTableDomain> GetComment(int UserId)
+        {
+            return this.userRepository.GetComment(UserId);
+        }
+
+        [HttpPost]
+        [Route("CreateComment")]
+        public int CreateComment([FromBody] ReviewTableDomain review)
+        {
+            return this.userRepository.CreateComment(review);
+        }
+
+        [HttpPut]
+        [Route("EditComment/{id}")]
+        public void EditComment([FromBody] ReviewTableDomain review, int id)
+        {
+            this.userRepository.EditComment(review, id);
+        }
     }
 }

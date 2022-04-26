@@ -4,6 +4,7 @@ using RmsWebApi.Repository.Interfaces;
 using System.Linq;
 using RmsWebApi.Data;
 using RmsWebApi.Repository;
+using RMS.Domain.ResumeDomain;
 
 namespace RmsWebApi.Controllers.API.Controller
 {
@@ -37,6 +38,13 @@ namespace RmsWebApi.Controllers.API.Controller
             return this.resumeRepository.GetNonDraftResume();
         }
 
+        //[HttpGet("{name}")]
+        //[Route("FilterBySkills")]
+        //public List<SkillsDomain> FilterBySkills(string name)
+        //{
+        //    return this.resumeRepository.FilterBySkills(name);
+        //}
+
         [HttpPost]
         public ResumeDomain Post([FromBody] ResumeDomain value)
         {
@@ -54,5 +62,7 @@ namespace RmsWebApi.Controllers.API.Controller
         {
             this.resumeRepository.Update(id, value);
         }
+
+       
     }
 }
