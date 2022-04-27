@@ -25,6 +25,7 @@ namespace RmsWebApi.RMS_DB
         public virtual DbSet<MyDetail> MyDetails { get; set; } = null!;
         public virtual DbSet<ProjectMaster> ProjectMasters { get; set; } = null!;
         public virtual DbSet<Resume> Resumes { get; set; } = null!;
+        public virtual DbSet<ReviewTable> ReviewTables { get; set; } = null!;
         public virtual DbSet<RoleMaster> RoleMasters { get; set; } = null!;
         public virtual DbSet<Skill> Skills { get; set; } = null!;
         public virtual DbSet<SkillsMaster> SkillsMasters { get; set; } = null!;
@@ -35,6 +36,7 @@ namespace RmsWebApi.RMS_DB
         public virtual DbSet<UserResume> UserResumes { get; set; } = null!;
         public virtual DbSet<WorkExperience> WorkExperiences { get; set; } = null!;
         public virtual DbSet<training> training { get; set; } = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -67,28 +69,24 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.AboutMes)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_AboutMe_Resume").OnDelete(DeleteBehavior.Cascade);
+                    .HasConstraintName("FK_AboutMe_Resume");
             });
 
             modelBuilder.Entity<Achievement>(entity =>
             {
                 entity.Property(e => e.AchievementId).HasColumnName("achievementId");
 
-                
-
                 entity.Property(e => e.AchievementName)
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("achievementName");
-
-               
 
                 entity.Property(e => e.ResumeId).HasColumnName("resumeId");
 
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.Achievements)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_Achievements_Resume").OnDelete(DeleteBehavior.Cascade);
+                    .HasConstraintName("FK_Achievements_Resume");
             });
 
             modelBuilder.Entity<Certification>(entity =>
@@ -107,8 +105,7 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.Certifications)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("resumeId")
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .HasConstraintName("resumeId");
             });
 
             modelBuilder.Entity<DesginationMaster>(entity =>
@@ -169,7 +166,7 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.EducationDetails)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_EducationDetails_Resume").OnDelete(DeleteBehavior.Cascade);
+                    .HasConstraintName("FK_EducationDetails_Resume");
             });
 
             modelBuilder.Entity<Membership>(entity =>
@@ -177,8 +174,6 @@ namespace RmsWebApi.RMS_DB
                 entity.ToTable("Membership");
 
                 entity.Property(e => e.MembershipId).HasColumnName("membershipId");
-
-                
 
                 entity.Property(e => e.MembershipName)
                     .HasMaxLength(50)
@@ -190,7 +185,7 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.Memberships)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_Membership_Resume").OnDelete(DeleteBehavior.Cascade);
+                    .HasConstraintName("FK_Membership_Resume");
             });
 
             modelBuilder.Entity<MyDetail>(entity =>
@@ -205,10 +200,7 @@ namespace RmsWebApi.RMS_DB
                     .IsUnicode(false)
                     .HasColumnName("name");
 
-                entity.Property(e => e.ProfilePicture)
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("profilePicture");
+                entity.Property(e => e.ProfilePicture).HasColumnName("profilePicture");
 
                 entity.Property(e => e.ResumeId).HasColumnName("resumeId");
 
@@ -222,7 +214,7 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.MyDetails)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_MyDetails_Resume").OnDelete(DeleteBehavior.Cascade);
+                    .HasConstraintName("FK_MyDetails_Resume");
             });
 
             modelBuilder.Entity<ProjectMaster>(entity =>
@@ -271,6 +263,34 @@ namespace RmsWebApi.RMS_DB
                     .HasColumnName("updationDate");
             });
 
+            modelBuilder.Entity<ReviewTable>(entity =>
+            {
+                entity.HasKey(e => e.ReviewId)
+                    .HasName("PK__ReviewTa__2ECD6E0490F7C505");
+
+                entity.ToTable("ReviewTable");
+
+                entity.Property(e => e.ReviewId).HasColumnName("reviewId");
+
+                entity.Property(e => e.ResumeId).HasColumnName("resumeId");
+
+                entity.Property(e => e.ReviewComment)
+                    .HasColumnType("text")
+                    .HasColumnName("reviewComment");
+
+                entity.Property(e => e.ReviewerId).HasColumnName("reviewerId");
+
+                entity.HasOne(d => d.Resume)
+                    .WithMany(p => p.ReviewTables)
+                    .HasForeignKey(d => d.ResumeId)
+                    .HasConstraintName("FK__ReviewTab__resum__123EB7A3").OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(d => d.Reviewer)
+                    .WithMany(p => p.ReviewTables)
+                    .HasForeignKey(d => d.ReviewerId)
+                    .HasConstraintName("FK__ReviewTab__revie__1332DBDC").OnDelete(DeleteBehavior.Cascade);
+            });
+
             modelBuilder.Entity<RoleMaster>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
@@ -305,19 +325,18 @@ namespace RmsWebApi.RMS_DB
 
                 entity.Property(e => e.SkillName)
                     .HasMaxLength(40)
-                    .IsUnicode(false)
-                    .HasColumnName("skillName");
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.Skills)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_Skills_Resume").OnDelete(DeleteBehavior.Cascade);
+                    .HasConstraintName("FK_Skills_Resume");
             });
 
             modelBuilder.Entity<SkillsMaster>(entity =>
             {
                 entity.HasKey(e => e.SkillsId)
-                    .HasName("PK__SkillsMa__CF77BD794EE76F0A");
+                    .HasName("PK__SkillsMa__CF77BD79946A9012");
 
                 entity.ToTable("SkillsMaster");
 
@@ -336,11 +355,10 @@ namespace RmsWebApi.RMS_DB
                     .HasColumnName("skillName");
             });
 
-
             modelBuilder.Entity<TechStackMaster>(entity =>
             {
                 entity.HasKey(e => e.TechStackId)
-                    .HasName("PK__TeckStac__A64E4E7742F26B41");
+                    .HasName("PK__TeckStac__A64E4E77621E130E");
 
                 entity.ToTable("TechStackMaster");
 
@@ -355,7 +373,7 @@ namespace RmsWebApi.RMS_DB
             modelBuilder.Entity<TechStackValue>(entity =>
             {
                 entity.HasKey(e => e.ValueId)
-                    .HasName("PK__TechStac__4C5414233DCB3F0B");
+                    .HasName("PK__TechStac__4C54142360350772");
 
                 entity.Property(e => e.ValueId).HasColumnName("valueId");
 
@@ -371,7 +389,7 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.TechStack)
                     .WithMany(p => p.TechStackValues)
                     .HasForeignKey(d => d.TechStackId)
-                    .HasConstraintName("FK__TechStack__techS__73BA3083");
+                    .HasConstraintName("FK__TechStack__techS__7A672E12");
             });
 
             modelBuilder.Entity<UserInfo>(entity =>
@@ -509,7 +527,7 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.WorkExperiences)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK_WorkExperience_Resume").OnDelete(DeleteBehavior.Cascade);
+                    .HasConstraintName("FK_WorkExperience_Resume");
             });
 
             modelBuilder.Entity<training>(entity =>
@@ -529,8 +547,7 @@ namespace RmsWebApi.RMS_DB
                 entity.HasOne(d => d.Resume)
                     .WithMany(p => p.training)
                     .HasForeignKey(d => d.ResumeId)
-                    .HasConstraintName("FK__Training__resume__6EF57B66")
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .HasConstraintName("FK__Training__resume__75A278F5");
             });
 
             OnModelCreatingPartial(modelBuilder);

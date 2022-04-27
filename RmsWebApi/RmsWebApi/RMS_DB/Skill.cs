@@ -9,6 +9,7 @@ namespace RmsWebApi.RMS_DB
         public int? ResumeId { get; set; }
         public string Category { get; set; } = null!;
         public string? SkillName { get; set; }
+
         public virtual Resume? Resume { get; set; }
     }
 }

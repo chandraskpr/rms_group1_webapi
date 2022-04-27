@@ -15,6 +15,11 @@ namespace RmsWebApi.Repository.Interfaces
         public List<UserNotificationsDomain> GetNotifications();
 
         public List<UserNotificationsDomain> GetActiveNotification();
+        public int CreateComment(ReviewTableDomain review);
+
+        public void EditComment(ReviewTableDomain review, int id);
+
+        public List<ReviewTableDomain> GetComment(int userId);
 
     }
 }

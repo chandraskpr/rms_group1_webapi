@@ -16,6 +16,7 @@ namespace RmsWebApi.Data
             workExperienceDomains = new List<WorkExperienceDomain>();
             certifications = new List<CertificationDomain>();
             trainings = new List<TrainingDomain>();
+            reviews = new List<ReviewTableDomain>();
         }
         public int ResumeId { get; set; }
         public string ResumeTitle { get; set; }
@@ -30,7 +31,7 @@ namespace RmsWebApi.Data
         public List<MyDetails> myDetails { get; set; }
         public List<WorkExperienceDomain> workExperienceDomains { get; set; }
         public List<CertificationDomain> certifications { get; set; }
-
         public List<TrainingDomain> trainings { get; set; }
+        public List<ReviewTableDomain> reviews { get; set; }
     }
 }
