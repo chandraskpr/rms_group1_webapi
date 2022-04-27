@@ -38,13 +38,6 @@ namespace RmsWebApi.Controllers.API.Controller
             return this.resumeRepository.GetNonDraftResume();
         }
 
-        //[HttpGet("{name}")]
-        //[Route("FilterBySkills")]
-        //public List<SkillsDomain> FilterBySkills(string name)
-        //{
-        //    return this.resumeRepository.FilterBySkills(name);
-        //}
-
         [HttpPost]
         public ResumeDomain Post([FromBody] ResumeDomain value)
         {
@@ -63,6 +56,12 @@ namespace RmsWebApi.Controllers.API.Controller
             this.resumeRepository.Update(id, value);
         }
 
-       
+        [HttpGet]
+        [Route("GetResumeBySkills/{skillIds}")]
+        public List<ResumeDomain> GetResumeBySkills(int skillIds)
+        {
+            return this.resumeRepository.GetResumeBySkills(skillIds);
+            
+        }
     }
 }
