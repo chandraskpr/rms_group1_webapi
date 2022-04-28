@@ -15,5 +15,7 @@ namespace RmsWebApi.Repository.Interfaces
         public List<ResumeDomain> GetNonDraftResume();
         public List<ResumeDomain> GetResumeBySkills(List<string> skills);
         public List<ResumeDomain> GetResumeByProjects(List<string> projects);
+        
+        public List<ResumeDomain> GetResumeByRoles(List<string> roles);
     }
 }
