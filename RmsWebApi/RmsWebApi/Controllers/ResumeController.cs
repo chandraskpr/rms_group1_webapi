@@ -50,6 +50,13 @@ namespace RmsWebApi.Controllers.API.Controller
 
         }
 
+        [HttpPost]
+        [Route("GetResumeByProjects")]
+        public List<ResumeDomain> GetResumeByProjects([FromBody] List<string> projects)
+        {
+            return this.resumeRepository.GetResumeByProjects(projects);
+        }
+
         [HttpDelete ("{id}")]
         public void Delete(int id)
         {
