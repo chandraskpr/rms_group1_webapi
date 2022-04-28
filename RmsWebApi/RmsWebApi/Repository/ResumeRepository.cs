@@ -494,5 +494,101 @@ namespace RmsWebApi.Repository
             }
 
         }
+
+        public List<ResumeDomain> GetResumeBySkills(List<string> skills)
+        {
+            var result = base.SelectAll().Where(z => z.Skills.Any(y => skills.Any(s =>  y.SkillName == s))).Select(x => new ResumeDomain()
+            {
+                ResumeId = x.ResumeId,
+                ResumeTitle = x.ResumeTitle,
+                ResumeStatus = x.ResumeStatus,
+                UpdationDate = x.UpdationDate,
+                CreationDate = x.CreationDate,
+
+                SkillList = x.Skills.Select(s => new RMS.Domain.ResumeDomain.Skills()
+                {
+                    Category = s.Category,
+                    SkillName = s.SkillName,
+
+                }).ToList(),
+
+                aboutMes = x.AboutMes.Select(b => new RMS.Domain.ResumeDomain.AboutMes()
+                {
+                    KeyPoints = b.KeyPoints,
+                    MainDescription = b.MainDescription,
+                }).ToList(),
+
+                achievements = x.Achievements.Select(c => new RMS.Domain.ResumeDomain.Achievements()
+                {
+                    AchievementName = c.AchievementName,
+                }).ToList(),
+
+                memberships = x.Memberships.Select(e => new RMS.Domain.ResumeDomain.Memberships()
+                {
+                    MembershipName = e.MembershipName,
+                }).ToList(),
+
+                myDetails = x.MyDetails.Select(f => new RMS.Domain.ResumeDomain.MyDetails()
+                {
+                    ProfilePicture = f.ProfilePicture,
+                    TotalExp = (float)f.TotalExp,
+                    UserName = f.Name,
+                    Role = f.Role,
+                }).ToList(),
+
+                workExperienceDomains = x.WorkExperiences.Select(g => new RMS.Domain.ResumeDomain.WorkExperienceDomain()
+                {
+                    ClientDescription = g.ClientDescription,
+                    Country = g.Country,
+                    ProjectName = g.ProjectName,
+                    ProjectRole = g.ProjectRole,
+                    ProjectResponsibilities = g.ProjectResponsibilities,
+                    StartDate = g.StartDate,
+                    EndDate = g.EndDate,
+                    BusinessSolution = g.BusinessSolution,
+                    TechnologyStack = g.TechnologyStack,
+                }).ToList(),
+
+                educationDetails = x.EducationDetails.Select(d => new RMS.Domain.ResumeDomain.EducationDetails()
+                {
+                    EducationDetailsId = d.EducationId,
+                    CourseName = d.CourseName,
+                    Stream = d.Specialization,
+                    InstitutionName = d.InstituteName,
+                    PassingYear = d.PassingYear,
+                    Marks = (float)d.Marks,
+                    University = d.University,
+                }).ToList(),
+
+                //userResumes = x.UserResumes.Select(p => new UserResumeDomain()
+                //{
+                //    UserId = p.UserId,
+                //    ResumeId = p.ResumeId,
+                //    UserResumeId = p.UserResumeId,
+                //}).ToList(),
+
+                certifications = x.Certifications.Select(p => new CertificationDomain()
+                {
+                    CertificationId = p.CertificationId,
+                    CertificationName = p.CertificationName,
+                }).ToList(),
+
+                trainings = x.training.Select(p => new TrainingDomain()
+                {
+                    TrainingId = p.TrainingId,
+                    Trainingname = p.Trainingname
+                }).ToList(),
+
+                reviews = x.ReviewTables.Select(a => new ReviewTableDomain()
+                {
+                    ReviewId = a.ReviewId,
+                    ReviewComment = a.ReviewComment,
+                    ResumeId = a.ResumeId,
+                    ReviewerId = a.ReviewerId,
+                }).ToList()
+
+            }).ToList();
+            return result;
+        }
     }
 }

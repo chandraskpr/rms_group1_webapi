@@ -42,6 +42,14 @@ namespace RmsWebApi.Controllers.API.Controller
             return this.resumeRepository.Create(value);
         }
 
+        [HttpPost]
+        [Route("GetResumeBySkills")]
+        public List<ResumeDomain> GetResumeBySkills([FromBody] List<string> skills)
+        {
+            return this.resumeRepository.GetResumeBySkills(skills);
+
+        }
+
         [HttpDelete ("{id}")]
         public void Delete(int id)
         {
